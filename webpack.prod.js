@@ -1,8 +1,7 @@
 const merge = require('webpack-merge');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
-const { baseConfig, paths } = require('./webpack.base');
+const { baseConfig, htmlEntries } = require('./webpack.base');
 
 module.exports = merge(baseConfig, {
   devtool: 'cheap-module-source-map',
@@ -21,5 +20,5 @@ module.exports = merge(baseConfig, {
         warnings: false,
       },
     }),
-  ],
+  ].concat(htmlEntries),
 });

@@ -1,35 +1,53 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const _ = require('lodash');
 
-const NODE_ENV = process.env.NODE_ENV || 'dev';
 const paths = {
-  src: path.resolve(__dirname, 'src'),
-  htmlTemplate: path.resolve(__dirname, 'src', 'index.pug'),
-  out: path.resolve(__dirname, '..', 'backend', 'public', 'client'),
-  i18n: path.resolve(__dirname, 'src', 'utils', 'i18n'),
-  logger: path.resolve(__dirname, 'src', 'utils', 'logger'),
+  app: path.resolve(__dirname, 'app'),
+  core: path.resolve(__dirname, 'core'),
+  htmlTemplate: path.resolve(__dirname, 'examples', 'todo', 'index.pug'),
+  out: path.resolve(__dirname, 'dist'),
+  i18n: path.resolve(__dirname, 'examples', 'todo', 'utils', 'i18n'),
+  logger: path.resolve(__dirname, 'core', 'globals', 'logger'),
 };
 
+const apps = {
+  app: paths.app,
+  todo: path.resolve(__dirname, 'examples', 'todo'),
+};
+
+const appEntries = _.mapValues(apps, function(value) {
+  return ['babel-polyfill', path.join(value, './index.jsx')];
+});
+
+const appHtmlEntries = _.map(apps, function(value, key) {
+  return new HtmlWebpackPlugin({
+    inject: true,
+    chunks: [key],
+    filename: key === 'app' ? 'index.html' : path.join(key, 'index.html'),
+    template: paths.htmlTemplate,
+  });
+});
+
 const env = {
-  'NODE_ENV': JSON.stringify(NODE_ENV),
+  'NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
 };
 
 const baseConfig = {
-  context: paths.src,
-  entry: ['babel-polyfill', './index.jsx'],
+  entry: appEntries,
   output: {
     path: paths.out,
-    filename: '[hash].js',
+    filename: '[name]/[hash].js',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
     modules: ['node_modules'],
-    alias: {
+    alias: _.merge({
       i18n: paths.i18n,
       logger: paths.logger,
-      app: paths.src,
-    },
+      core: paths.core,
+    }, apps),
   },
   module: {
     rules: [
@@ -38,11 +56,9 @@ const baseConfig = {
       { test: /\.pug$/, use: ['pug-loader'] },
       { test: /\.svg$/, use: ['babel-loader', 'react-svg-loader'] },
       { test: /\.(jpg|png|ico)$/, use: ['file-loader'] },
-      { test: require.resolve('snapsvg'), use: ['imports-loader?this=>window,fix=>module.exports=0'] },
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: paths.htmlTemplate }),
     new webpack.ProvidePlugin({ 'logger': 'logger' }),
     new webpack.DefinePlugin({ 'process.env': env }),
   ],
@@ -54,4 +70,4 @@ const baseConfig = {
   },
 }
 
-module.exports = { baseConfig, paths }
+module.exports = { baseConfig, paths, apps, appHtmlEntries };

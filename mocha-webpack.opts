@@ -1,3 +1,4 @@
 --colors
 --recursive
 --require ./test/test_helpers.js
+--require source-map-support/register

@@ -1,7 +1,6 @@
 const merge = require('webpack-merge');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const { baseConfig, paths } = require('./webpack.base');
+const { baseConfig, appHtmlEntries } = require('./webpack.base');
 
 const PORT = process.env.PORT || 3000;
 
@@ -18,4 +17,5 @@ module.exports = merge(baseConfig, {
       '/api' : 'http://localhost:9000',
     },
   },
+  plugins: appHtmlEntries,
 });
