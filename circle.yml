@@ -1,0 +1,19 @@
+machine:
+  node:
+    version: 8
+
+dependencies:
+  cache_directories:
+    - "~/.yarn"
+    - "node_modules"
+  override:
+    - yarn
+
+test:
+  pre:
+    - yarn lint
+  override:
+    - yarn test
+  post:
+    - mkdir -p "$CIRCLE_ARTIFACTS/coverage"
+    - mv "coverage" "$CIRCLE_ARTIFACTS/coverage"
