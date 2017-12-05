@@ -20,13 +20,13 @@ const partitions = {
 describe("partitions", function() {
   describe("buildActions", function() {
     it("returns an object with partitions that have actions", function() {
-      expect(buildActions(partitions)).to.eql({ one: {}, two: {} });
+      expect(buildActions(partitions)).toEqual({ one: {}, two: {} });
     });
 
     describe("referencing other action partitions", function() {
+      let actionStub;
       beforeEach(function() {
-        this.actionStub = sinon.stub();
-        const that = this;
+        actionStub = jest.fn();
 
         const crossReferencePartitions = {
           one: {
@@ -36,7 +36,7 @@ describe("partitions", function() {
           },
           two: {
             actions: () => {
-              return { test: that.actionStub };
+              return { test: actionStub };
             }
           }
         };
@@ -46,14 +46,14 @@ describe("partitions", function() {
       });
 
       it("should be able to properly call actions from other partitions", function() {
-        expect(this.actionStub).to.have.been.calledOnce;
+        expect(actionStub).toBeCalled();
       });
     });
   });
 
   describe("buildReducers", function() {
     it("returns an object with partitions that have reducers", function() {
-      expect(buildReducers(partitions)()).to.eql({ one: {}, three: {} });
+      expect(buildReducers(partitions)()).toEqual({ one: {}, three: {} });
     });
   });
 });

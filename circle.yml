@@ -13,7 +13,7 @@ test:
   pre:
     - yarn lint
   override:
-    - yarn test
+    - yarn test-ci
   post:
     - mkdir -p "$CIRCLE_ARTIFACTS/coverage"
     - mv "coverage" "$CIRCLE_ARTIFACTS/coverage"

@@ -68,27 +68,30 @@ const outOfOrderServices = {
 };
 
 describe("buildServices", function() {
+  let services;
+
   describe("when services require other services that are instantiated", function() {
     beforeEach(function() {
-      this.services = buildServices(inOrderServices);
+      services = buildServices(inOrderServices);
     });
 
     it("should not throw errors when a service references another service", function() {
-      expect(this.services.a.test()).to.eql("a");
-      expect(this.services.b.test()).to.eql("b a");
-      expect(this.services.c.test()).to.eql("c b a");
+      expect(services.a.test()).toEqual("a");
+      expect(services.b.test()).toEqual("b a");
+      expect(services.c.test()).toEqual("c b a");
     });
   });
 
   describe("when services require other services that are not yet instantiated", function() {
+    let services;
     beforeEach(function() {
-      this.services = buildServices(outOfOrderServices);
+      services = buildServices(outOfOrderServices);
     });
 
     it("should not throw errors when a service references another service", function() {
-      expect(this.services.a.test()).to.eql("a");
-      expect(this.services.b.test()).to.eql("b a");
-      expect(this.services.c.test()).to.eql("c b a");
+      expect(services.a.test()).toEqual("a");
+      expect(services.b.test()).toEqual("b a");
+      expect(services.c.test()).toEqual("c b a");
     });
   });
 
@@ -96,18 +99,20 @@ describe("buildServices", function() {
     const services = buildServices({
       selfReferenceService: SelfReferenceService
     });
-    expect(services.selfReferenceService.services).to.be.empty;
+    expect(services.selfReferenceService.services).toEqual({});
   });
 
   describe("instatiating services", function() {
+    let services;
+
     beforeEach(function() {
-      this.services = buildServices(inOrderServices);
+      services = buildServices(inOrderServices);
     });
 
     it("should only instatiate services once", function() {
-      this.services.b.increment();
-      this.services.c.increment();
-      expect(this.services.counter.count).to.eql(2);
+      services.b.increment();
+      services.c.increment();
+      expect(services.counter.count).toEqual(2);
     });
   });
 });

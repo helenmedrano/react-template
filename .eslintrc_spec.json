@@ -1,6 +1,6 @@
 {
   "extends": "react-app",
-  "plugins": ["prettier", "mocha"],
+  "plugins": ["prettier"],
   "globals": {
     "logger": true,
     "expect": true,
@@ -8,10 +8,7 @@
   },
   "rules": {
     "prettier/prettier": "error",
-    "no-unused-expressions": "off",
-    "mocha/no-exclusive-tests": "error",
-    "mocha/no-identical-title": "error",
-    "mocha/no-nested-tests": "error"
+    "no-unused-expressions": "off"
   },
   "settings": {
     "import/resolver": {
