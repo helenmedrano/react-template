@@ -3,7 +3,9 @@
 ## Dependencies
 * [Yarn](https://yarnpkg.com/en/docs/install)
   * `brew install yarn`
-* Optional: install [Chrome React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
+* Optional:
+  * install [Chrome React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
+  * install [Redux DevTools Extension (Chrome, Firefox and Electron)](http://extension.remotedev.io/)
 
 ## Startup
 To run this, just run the following after installing the dependencies

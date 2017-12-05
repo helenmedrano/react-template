@@ -1,18 +1,18 @@
+import * as R from "ramda";
 import { applyMiddleware, createStore } from "redux";
 import reduxThunkMiddleware from "redux-thunk";
-import { createLogger } from "redux-logger";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 import config from "core/config";
 
 let baseMiddleware = [reduxThunkMiddleware];
 
-if (config.isDevelop) {
-  baseMiddleware = baseMiddleware.concat(
-    createLogger({ collapsed: true, timestamp: false })
-  );
-}
-
 const buildStore = ({ reducer, middleware = [] }) =>
-  createStore(reducer, applyMiddleware(...baseMiddleware.concat(middleware)));
+  createStore(
+    reducer,
+    R.when(() => config.isDevelop, composeWithDevTools)(
+      applyMiddleware(...baseMiddleware.concat(middleware))
+    )
+  );
 
 export default buildStore;
