@@ -1,20 +1,20 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import colors from "todo/styles/colors";
-import { clearFix } from "todo/styles/mixins";
+import colors from 'todo/styles/colors'
+import { clearFix } from 'todo/styles/mixins'
 
-import TextInput from "todo/components/textInput";
-import Button from "todo/components/button";
+import TextInput from 'todo/components/text_input'
+import Button from 'todo/components/button'
 
 const CreateTodoForm = styled.form`
   ${clearFix()} width: 100%;
   position: relative;
   display: block;
-`;
+`
 
-const TodoInput = styled(TextInput)`margin-bottom: 5px;`;
+const TodoInput = styled(TextInput)`margin-bottom: 5px;`
 
 const SubmitTodo = styled(Button)`
   float: right;
@@ -23,27 +23,27 @@ const SubmitTodo = styled(Button)`
   &:disabled {
     background: ${colors.disabled};
   }
-`;
+`
 
 class CreateTodo extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
-      input: ""
-    };
+      input: '',
+    }
   }
 
   createTodo = e => {
-    e.preventDefault();
-    if (this.state.input !== "") {
-      this.props.create(this.state.input);
-      this.setState({ input: "" });
+    e.preventDefault()
+    if (this.state.input !== '') {
+      this.props.create(this.state.input)
+      this.setState({ input: '' })
     }
-  };
+  }
 
   render() {
-    const { input } = this.state;
+    const { input } = this.state
 
     return (
       <CreateTodoForm onSubmit={this.createTodo}>
@@ -53,12 +53,12 @@ class CreateTodo extends Component {
         />
         <SubmitTodo disabled={input.length === 0}>Create</SubmitTodo>
       </CreateTodoForm>
-    );
+    )
   }
 }
 
 CreateTodo.propTypes = {
-  create: PropTypes.func
-};
+  create: PropTypes.func,
+}
 
-export default CreateTodo;
+export default CreateTodo

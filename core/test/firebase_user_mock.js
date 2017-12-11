@@ -1,4 +1,4 @@
-import { identity } from "ramda";
+import { identity } from 'ramda'
 
 /**
  * This is a mock of the firebase.User interface
@@ -9,6 +9,6 @@ import { identity } from "ramda";
  * the user object and we do not require use of any of the methods
  * defined in the firebase.User interface
  */
-const firebaseUserMock = identity;
+const firebaseUserMock = identity
 
-export default firebaseUserMock;
+export default firebaseUserMock

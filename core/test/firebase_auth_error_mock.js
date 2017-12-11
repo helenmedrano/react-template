@@ -4,11 +4,13 @@
  */
 const firebaseAuthErrorMock = (
   message = "Let's pretend I'm a firebase error object.",
-  code = "authMock/mock-error"
-) => ({
-  message,
-  code,
-  toString: () => message
-});
+  code = 'authMock/mock-error'
+) => {
+  return {
+    message,
+    code,
+    toString: () => message,
+  }
+}
 
-export default firebaseAuthErrorMock;
+export default firebaseAuthErrorMock

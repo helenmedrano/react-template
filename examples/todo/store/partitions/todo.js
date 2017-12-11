@@ -1,10 +1,10 @@
-import { handleActions, createActions } from "redux-actions";
-import { identity } from "todo/utils";
+import { handleActions, createActions } from 'redux-actions'
+import { identity } from 'todo/utils'
 
 const defaultInitialState = {
   creatingTodo: false,
-  todos: []
-};
+  todos: [],
+}
 
 /**
  * Actions are composed of simpleActions and asyncActions
@@ -15,18 +15,18 @@ const actions = ({ todoService }) => {
   const simpleActions = createActions({
     toggleComplete: todo => todo.id,
     startCreateTodo: identity,
-    completeCreateTodo: identity
-  });
+    completeCreateTodo: identity,
+  })
 
   const asyncActions = {
     create: text => dispatch => {
-      dispatch(simpleActions.startCreateTodo());
-      dispatch(simpleActions.completeCreateTodo(todoService.create(text)));
-    }
-  };
+      dispatch(simpleActions.startCreateTodo())
+      dispatch(simpleActions.completeCreateTodo(todoService.create(text)))
+    },
+  }
 
-  return { ...simpleActions, ...asyncActions };
-};
+  return { ...simpleActions, ...asyncActions }
+}
 
 /**
  * the reducer of a partition is a single function that responds to actions by taking the data/payload
@@ -39,20 +39,20 @@ const reducer = ({ todos } = {}) =>
       toggleComplete: (state, action) => {
         const updatedTodos = state.todos.map(todo => {
           if (todo.id === action.payload) {
-            todo.completed = !todo.completed;
+            todo.completed = !todo.completed
           }
-          return todo;
-        });
-        return { ...state, updatedTodos };
+          return todo
+        })
+        return { ...state, updatedTodos }
       },
       startCreateTodo: state => {
-        return { ...state, creatingTodo: true };
+        return { ...state, creatingTodo: true }
       },
       completeCreateTodo: (state, action) => {
-        return { creatingTodo: true, todos: [...state.todos, action.payload] };
-      }
+        return { creatingTodo: true, todos: [...state.todos, action.payload] }
+      },
     },
     { ...defaultInitialState, ...todos }
-  );
+  )
 
-export default { actions, reducer };
+export default { actions, reducer }

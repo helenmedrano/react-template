@@ -1,6 +1,8 @@
 export const links = {
-  linkedin: "https://wwww.linkedin.com/company/originate",
-  twitter: "https://twitter.com/OriginateLabs"
-};
+  linkedin: 'https://wwww.linkedin.com/company/originate',
+  twitter: 'https://twitter.com/OriginateLabs',
+}
 
-export default links;
+const constants = links
+
+export default constants

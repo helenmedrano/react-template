@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-import colors from "core/styles/colors";
-import { transitions } from "core/styles/mixins";
+import colors from 'core/styles/colors'
+import { transitions } from 'core/styles/mixins'
 
 const Button = styled.button`
-  ${transitions(["background"])} background: ${colors.white};
+  ${transitions(['background'])} background: ${colors.white};
   border-radius: 4px;
   border: 1px solid ${colors.bg};
   color: ${colors.bg};
@@ -16,6 +16,6 @@ const Button = styled.button`
   &:hover {
     background: ${colors.grayDA};
   }
-`;
+`
 
-export default Button;
+export default Button

@@ -1,11 +1,11 @@
-import _ from "lodash";
+import _ from 'lodash'
 
-export const identity = x => x;
+export const identity = x => x
 
 export const renderIf = cond => body => {
   // eslint-disable-line arrow-parens
   if (cond) {
-    return _.isFunction(body) ? body() : body;
+    return _.isFunction(body) ? body() : body
   }
-  return null;
-};
+  return null
+}

@@ -1,6 +1,6 @@
-import config from "core/config";
+import config from 'core/config'
 
-const identity = x => x;
+const identity = x => x
 
 /* eslint-disable no-console */
 let logger = {
@@ -9,8 +9,8 @@ let logger = {
   warn: identity,
   group: identity,
   groupEnd: identity,
-  error: console.error
-};
+  error: console.error,
+}
 
 if (config.isDevelop) {
   logger = {
@@ -19,9 +19,9 @@ if (config.isDevelop) {
     groupEnd: console.groupEnd,
     info: console.info,
     warn: console.warn,
-    error: console.error
-  };
+    error: console.error,
+  }
 }
 /* eslint-enable no-console */
 
-module.exports = logger;
+module.exports = logger

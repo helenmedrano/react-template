@@ -1,16 +1,16 @@
-import { buildReducers, buildActions } from "core/builders/partitions";
+import { buildReducers, buildActions } from 'core/builders/partitions'
 
-import services from "todo/services";
+import services from 'todo/services'
 
-import todos from "./todo";
+import todos from './todo'
 
 const partitions = {
-  todos
-};
+  todos,
+}
 
 const dependencies = {
-  ...services
-};
+  ...services,
+}
 
-export const actions = buildActions(partitions, dependencies);
-export const reducers = buildReducers(partitions);
+export const actions = buildActions(partitions, dependencies)
+export const reducers = buildReducers(partitions)

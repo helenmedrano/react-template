@@ -1,10 +1,8 @@
-import i18n from "i18n-js";
+import i18n from 'i18n-js'
 
-import enLocale from "todo/locales/en";
+import enLocale from 'todo/locales/en'
 
-i18n.translations.en = enLocale;
-i18n.locale = "en";
+i18n.translations.en = enLocale
+i18n.locale = 'en'
 
-const translate = (string, options) => i18n.t(string, options);
-
-export default translate;
+export default (string, options) => i18n.t(string, options)

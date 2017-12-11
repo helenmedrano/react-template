@@ -1,69 +1,69 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import styled from "styled-components";
-import _ from "lodash";
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import styled from 'styled-components'
+import _ from 'lodash'
 
-import { actions } from "todo/store/partitions";
-import Tabs from "todo/components/tabs";
-import List from "todo/components/list";
+import { actions } from 'todo/store/partitions'
+import Tabs from 'todo/components/tabs'
+import List from 'todo/components/list'
 
-import CreateTodo from "./createTodo";
+import CreateTodo from './create_todo'
 
 const DemoContainer = styled.div`
   width: 350px;
   margin: auto;
-`;
+`
 
 const ListContainer = styled(List)`
   width: 100%;
   height: 200px;
   overflow-y: scroll;
   margin-bottom: 10px;
-`;
+`
 
 class TodoComponent extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
-      filter: "all"
-    };
+      filter: 'all',
+    }
   }
 
   filters() {
-    const filters = ["all", "completed", "active"];
+    const filters = ['all', 'completed', 'active']
     return filters.map(filter => {
       return {
         id: filter,
         active: this.state.filter === filter,
-        value: filter
-      };
-    });
+        value: filter,
+      }
+    })
   }
 
   filterTodos() {
-    const { todos } = this.props;
+    const { todos } = this.props
     const mapTodos = todo => {
       return {
         id: todo.id,
         checked: todo.completed,
-        value: todo.todo
-      };
-    };
+        value: todo.todo,
+      }
+    }
 
     switch (this.state.filter) {
-      case "completed":
-        return _.filter(todos, ["completed", true]).map(mapTodos);
-      case "active":
-        return _.filter(todos, ["completed", false]).map(mapTodos);
+      case 'completed':
+        return _.filter(todos, ['completed', true]).map(mapTodos)
+      case 'active':
+        return _.filter(todos, ['completed', false]).map(mapTodos)
       default:
-        return _.map(todos, mapTodos);
+        return _.map(todos, mapTodos)
     }
   }
 
   render() {
-    const { toggleTodo, createTodo } = this.props;
+    const { toggleTodo, createTodo } = this.props
     return (
       <DemoContainer>
         <Tabs
@@ -76,7 +76,7 @@ class TodoComponent extends Component {
         />
         <CreateTodo create={createTodo} />
       </DemoContainer>
-    );
+    )
   }
 }
 
@@ -85,26 +85,26 @@ TodoComponent.propTypes = {
     PropTypes.shape({
       id: PropTypes.number,
       todo: PropTypes.string,
-      completed: PropTypes.bool
+      completed: PropTypes.bool,
     })
   ),
   toggleTodo: PropTypes.func,
-  createTodo: PropTypes.func
-};
+  createTodo: PropTypes.func,
+}
 
 const mapState = state => {
   return {
-    todos: state.todos.todos
-  };
-};
+    todos: state.todos.todos,
+  }
+}
 
 const mapDispatch = dispatch => {
   return {
     toggleTodo: todo => dispatch(actions.todos.toggleComplete(todo)),
-    createTodo: text => dispatch(actions.todos.create(text))
-  };
-};
+    createTodo: text => dispatch(actions.todos.create(text)),
+  }
+}
 
-const TodoContainer = connect(mapState, mapDispatch)(TodoComponent);
+const TodoContainer = connect(mapState, mapDispatch)(TodoComponent)
 
-export { TodoComponent, TodoContainer };
+export { TodoComponent, TodoContainer }

@@ -1,10 +1,10 @@
-import buildStore from "core/builders/store";
+import buildStore from 'core/builders/store'
 
-import { reducers } from "./partitions";
-import initState from "./initState";
+import { reducers } from './partitions'
+import initState from './init_state'
 
-export default function initStore() {
-  const store = buildStore({ reducer: reducers });
-  initState(store.dispatch);
-  return store;
+export default function store() {
+  const _store = buildStore({ reducer: reducers })
+  initState(_store.dispatch)
+  return _store
 }

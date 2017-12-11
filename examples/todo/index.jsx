@@ -1,17 +1,18 @@
-import React from "react";
-import { render } from "react-dom";
-import { Provider } from "react-redux";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-import initStore from "todo/store";
+// eslint-disable import/no-extraneous-dependencies
+import initStore from 'todo/store'
 
-import AppComponent from "todo/pages/app";
-import DetailsComponent from "todo/pages/details";
-import { TodoContainer } from "todo/pages/demo";
-import NotFoundComponent from "todo/pages/notFound";
+import AppComponent from 'todo/pages/app'
+import DetailsComponent from 'todo/pages/details'
+import { TodoContainer } from 'todo/pages/demo'
+import NotFoundComponent from 'todo/pages/not_found'
 
-import "core/assets/css/reset.css";
-import "todo/assets/css/index.css";
+import 'core/assets/css/reset.css'
+import 'todo/assets/css/index.css'
 
 const Main = () => (
   <Provider store={initStore()}>
@@ -25,6 +26,6 @@ const Main = () => (
       </BrowserRouter>
     </AppComponent>
   </Provider>
-);
+)
 
-render(Main(), document.getElementById("app"));
+render(Main(), document.getElementById('app'))

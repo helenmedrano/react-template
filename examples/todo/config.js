@@ -1,7 +1,7 @@
 const config = {
-  env: process.env.NODE_ENV
-};
+  env: process.env.NODE_ENV,
+}
 
-export const isDevelop = config.env === "dev";
+export const isDevelop = config.env === 'dev'
 
-export default config;
+export default config

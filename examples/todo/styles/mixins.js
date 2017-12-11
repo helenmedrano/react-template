@@ -8,7 +8,7 @@ export function clearFix() {
     &:after {
       clear: both;
     }
-  `;
+  `
 }
 
 export function truncate() {
@@ -16,7 +16,7 @@ export function truncate() {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  `;
+  `
 }
 
 export function absolutePosition() {
@@ -24,5 +24,5 @@ export function absolutePosition() {
     position: absolute;
     top: 0;
     left: 0 ;
-  `;
+  `
 }

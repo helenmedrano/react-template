@@ -1,19 +1,17 @@
-import _ from "lodash";
+import _ from 'lodash'
 
 const defaultTransitionOptions = {
-  duration: ".2s",
-  timingFunction: "ease"
-};
+  duration: '.2s',
+  timingFunction: 'ease',
+}
 
 const transitions = (properties, options = defaultTransitionOptions) => {
   const attributes = _.chain(properties)
     .map(x => `${x} ${options.duration} ${options.timingFunction}`)
-    .join(", ")
-    .value();
+    .join(', ')
+    .value()
 
-  return `transition: ${attributes}`;
-};
+  return `transition: ${attributes}`
+}
 
-export { transitions };
-
-export default transitions;
+export { transitions }

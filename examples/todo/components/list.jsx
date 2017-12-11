@@ -1,13 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import colors from "todo/styles/colors";
+import colors from 'todo/styles/colors'
 
 const ListWrapper = styled.div`
   box-sizing: border-box;
   border: 1px ${colors.greyD} solid;
-`;
+`
 
 const BaseEntry = styled.div`
   font-weight: 300;
@@ -17,13 +17,13 @@ const BaseEntry = styled.div`
   &:nth-of-type(2n) {
     background: ${colors.greyD};
   }
-`;
+`
 
 const ListEntry = styled(BaseEntry)`
   input {
     margin-right: 10px;
   }
-`;
+`
 
 const CheckboxEntry = props => (
   <ListEntry>
@@ -34,7 +34,7 @@ const CheckboxEntry = props => (
     />
     {props.value}
   </ListEntry>
-);
+)
 
 const List = props => (
   <ListWrapper {...props}>
@@ -42,27 +42,27 @@ const List = props => (
       React.createElement(CheckboxEntry, {
         key: entry.id,
         toggle: props.toggle,
-        ...entry
+        ...entry,
       })
     )}
   </ListWrapper>
-);
+)
 
 const entryProp = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   checked: PropTypes.bool,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
-};
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+}
 
 CheckboxEntry.propTypes = {
   toggle: PropTypes.func,
-  ...entryProp
-};
+  ...entryProp,
+}
 
 List.propTypes = {
   entries: PropTypes.arrayOf(PropTypes.shape(entryProp)),
-  toggle: PropTypes.func
-};
+  toggle: PropTypes.func,
+}
 
-export const components = { CheckboxEntry };
-export default List;
+export const components = { CheckboxEntry }
+export default List

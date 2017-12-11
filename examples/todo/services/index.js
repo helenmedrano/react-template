@@ -1,10 +1,10 @@
-import buildServices from "core/builders/services";
-import config from "todo/config";
+import buildServices from 'core/builders/services'
+import config from 'todo/config'
 
-import todoService from "./todoService";
+import todoService from './todo_service'
 
-const services = { todoService };
+const services = { todoService }
 
-const dependencies = { config };
+const dependencies = { config }
 
-export default buildServices(services, dependencies);
+export default buildServices(services, dependencies)

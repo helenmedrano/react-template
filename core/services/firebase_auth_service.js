@@ -3,7 +3,7 @@ class FirebaseAuthService {
    * @param {Object} firebaseApp The firebaseApp to authenticate against
    */
   constructor(firebaseApp) {
-    this.auth = firebaseApp.auth();
+    this.auth = firebaseApp.auth()
   }
 
   /** 
@@ -14,7 +14,7 @@ class FirebaseAuthService {
   getAuthorizedUser() {
     // Short curcuit the asynchronous check by seeing if currentUser is set
     if (this.auth.currentUser) {
-      return Promise.resolve(this.auth.currentUser);
+      return Promise.resolve(this.auth.currentUser)
     }
 
     return new Promise((resolve, reject) =>
@@ -22,7 +22,7 @@ class FirebaseAuthService {
         user => resolve(user),
         error => reject(error)
       )
-    );
+    )
   }
 
   /**
@@ -31,7 +31,7 @@ class FirebaseAuthService {
    * @return {Promise<Object>} User object
    */
   createUserWithEmailAndPassword(email, password) {
-    return this.auth.createUserWithEmailAndPassword(email, password);
+    return this.auth.createUserWithEmailAndPassword(email, password)
   }
 
   /**
@@ -40,14 +40,14 @@ class FirebaseAuthService {
    * @return {Promise<Object>} User object
    */
   signInWithEmailAndPassword(email, password) {
-    return this.auth.signInWithEmailAndPassword(email, password);
+    return this.auth.signInWithEmailAndPassword(email, password)
   }
 
   /**
    * @return {Promise<null>} Resolves after sign out is complete
    */
   signOut() {
-    return this.auth.signOut();
+    return this.auth.signOut()
   }
 
   /**
@@ -55,8 +55,8 @@ class FirebaseAuthService {
    * @return {Promise<null>} Resolves after request is complete
    */
   sendPasswordResetEmail(email) {
-    return this.auth.sendPasswordResetEmail(email);
+    return this.auth.sendPasswordResetEmail(email)
   }
 }
 
-export default FirebaseAuthService;
+export default FirebaseAuthService

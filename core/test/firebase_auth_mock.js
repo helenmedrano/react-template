@@ -1,7 +1,7 @@
-import firebaseAuthErrorMock from "./firebaseAuthErrorMock";
-import firebaseUserMock from "./firebaseUserMock";
+import firebaseAuthErrorMock from './firebase_auth_error_mock'
+import firebaseUserMock from './firebase_user_mock'
 
-const mi = fn => jest.fn().mockImplementation(fn);
+const mi = fn => jest.fn().mockImplementation(fn)
 
 /**
  * This is a mock of the firebase.auth.Auth interface
@@ -9,55 +9,59 @@ const mi = fn => jest.fn().mockImplementation(fn);
  */
 const firebaseAuthMock = (firebaseState = {}) => {
   /**
-   * Allows mocking of firebase innerworkings or 
-   *   the simulation of events inside the firebase 
+   * Allows mocking of firebase innerworkings or
+   *   the simulation of events inside the firebase
    *   authentication system
    */
   const initialState = {
     authenticatedUser: null,
     error: false,
-    persistedUser: null
-  };
+    persistedUser: null,
+  }
   let state = {
     ...initialState,
-    ...firebaseState
-  };
+    ...firebaseState,
+  }
 
   return {
     mock: {
-      resetState: () => (state = { ...initialState }),
-      setState: ({ ...newState }) => (state = newState)
+      resetState: () => {
+        state = { ...initialState }
+      },
+      setState: ({ ...newState }) => {
+        state = newState
+      },
     },
 
     get currentUser() {
-      return state.authenticatedUser;
+      return state.authenticatedUser
     },
     onAuthStateChanged: mi(
       (onSuccess, onError) =>
         state.error ? onError(state.error) : onSuccess(state.persistedUser)
     ),
     createUserWithEmailAndPassword: mi(
-      (emailAddress, password) =>
+      emailAddress =>
         state.error
           ? Promise.reject(state.error)
           : Promise.resolve(firebaseUserMock({ emailAddress }))
     ),
     sendPasswordResetEmail: mi(
-      email => (state.error ? Promise.reject(state.error) : Promise.resolve())
+      () => (state.error ? Promise.reject(state.error) : Promise.resolve())
     ),
     signInWithEmailAndPassword: mi(
-      (emailAddress, password) =>
+      emailAddress =>
         state.error
           ? Promise.reject(state.error)
           : Promise.resolve(firebaseUserMock({ emailAddress }))
     ),
     signOut: mi(
       () => (state.error ? Promise.reject(state.error) : Promise.resolve())
-    )
-  };
-};
+    ),
+  }
+}
 
 /* Replicates structure of firebase.auth */
-firebaseAuthMock.Error = firebaseAuthErrorMock;
+firebaseAuthMock.Error = firebaseAuthErrorMock
 
-export default firebaseAuthMock;
+export default firebaseAuthMock

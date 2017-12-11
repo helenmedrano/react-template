@@ -1,6 +1,6 @@
 const config = {
   env: process.env.NODE_ENV,
-  isDevelop: process.env.NODE_ENV === "development"
-};
+  isDevelop: process.env.NODE_ENV === 'development',
+}
 
-export default config;
+export default config

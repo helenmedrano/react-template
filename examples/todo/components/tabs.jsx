@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import colors from "todo/styles/colors";
+import colors from 'todo/styles/colors'
 
 const Tab = styled.div`
   font-weight: 400;
@@ -16,10 +16,10 @@ const Tab = styled.div`
   &:not(:last-child) {
     margin-right: 5px;
   }
-`;
+`
 
 const Tabs = props => {
-  const onClick = props.tabClick;
+  const onClick = props.tabClick
   return (
     <div>
       {props.tabs.map(({ id, value, active }) => (
@@ -28,18 +28,18 @@ const Tabs = props => {
         </Tab>
       ))}
     </div>
-  );
-};
+  )
+}
 
 Tabs.propTypes = {
   tabs: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
       value: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-      active: PropTypes.bool
+      active: PropTypes.bool,
     })
   ),
-  tabClick: PropTypes.func
-};
+  tabClick: PropTypes.func,
+}
 
-export default Tabs;
+export default Tabs

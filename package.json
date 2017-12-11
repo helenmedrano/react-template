@@ -2,11 +2,18 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --hot --config ./webpack.dev.js",
-    "build": "NODE_ENV=production webpack --progress --config ./webpack.prod.js",
+    "build":
+      "NODE_ENV=production webpack --progress --config ./webpack.prod.js",
     "lint": "yarn lint-js && yarn lint-spec",
-    "lint-js": "eslint --ext .jsx --ext .js -c .eslintrc.json --ignore-pattern \"*.spec.*\" examples core app",
-    "lint-spec": "eslint --ext .spec.jsx --ext .spec.js -c .eslintrc_spec.json examples core app",
-    "test": "jest",
+    "lint-js":
+      "eslint --ext .jsx --ext .js --ignore-pattern \"*.spec.*\" --ignore-pattern '*/test/*' examples core app",
+    "lint-js-fix":
+      "eslint --fix --ext .jsx --ext .js --ignore-pattern \"*.spec.*\" examples core app",
+    "lint-spec":
+      "eslint --ext .spec.jsx --ext .spec.js -c .eslintrc_spec.json examples core app",
+    "lint-spec-fix":
+      "eslint --fix --ext .spec.jsx --ext .spec.js -c .eslintrc_spec.json examples core app",
+    "test": "yarn lint-js && yarn lint-spec && jest",
     "test-watch": "jest --watch",
     "test-ci": "jest --ci --coverage",
     "storybook": "start-storybook -p 6006",
@@ -48,10 +55,12 @@
     "css-loader": "^0.28.7",
     "enzyme": "^2.7.1",
     "eslint": "^4.7.0",
+    "eslint-config-originate": "^2.0.3",
     "eslint-config-prettier": "^2.4.0",
     "eslint-config-react-app": "^2.0.0",
     "eslint-import-resolver-webpack": "^0.8.1",
     "eslint-loader": "^1.6.1",
+    "eslint-plugin-filenames": "^1.2.0",
     "eslint-plugin-flowtype": "^2.35.1",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
@@ -76,10 +85,7 @@
     "webpack-merge": "^4.1.0"
   },
   "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "jsx"
-    ],
+    "moduleFileExtensions": ["js", "jsx"],
     "moduleNameMapper": {
       "\\.(jpg|png|ico|ttf|eot)$": "<rootDir>/test/fileMock.js",
       "\\.(svg)$": "<rootDir>/test/svgMock.js",

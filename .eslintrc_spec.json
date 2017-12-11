@@ -1,14 +1,10 @@
 {
-  "extends": "react-app",
-  "plugins": ["prettier"],
+  "extends": "originate/react",
   "globals": {
     "logger": true,
     "expect": true,
-    "sinon": true
-  },
-  "rules": {
-    "prettier/prettier": "error",
-    "no-unused-expressions": "off"
+    "sinon": true,
+    "jest": true
   },
   "settings": {
     "import/resolver": {

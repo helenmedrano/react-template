@@ -1,5 +1,5 @@
-import { combineReducers } from "redux";
-import _ from "lodash";
+import { combineReducers } from 'redux'
+import _ from 'lodash'
 
 /**
  * buildReducers takes an initial state and then creates all the reducers with the initial state.
@@ -7,11 +7,11 @@ import _ from "lodash";
  */
 const buildReducers = (partitions, initialState = {}) => {
   const reducers = _.chain(partitions)
-    .pickBy("reducer")
+    .pickBy('reducer')
     .mapValues(({ reducer }) => reducer(initialState))
-    .value();
-  return combineReducers(reducers);
-};
+    .value()
+  return combineReducers(reducers)
+}
 
 /**
  * buildActions initializes all actions by passing in dependencies, plus a reference to other actions.
@@ -19,17 +19,17 @@ const buildReducers = (partitions, initialState = {}) => {
  */
 const buildActions = (partitions, deps = {}) => {
   const actions = _.chain(partitions)
-    .pickBy("actions")
-    .mapValues("actions")
-    .value();
+    .pickBy('actions')
+    .mapValues('actions')
+    .value()
 
   _.forOwn(actions, (action, name) => {
     actions[name] = _.once(() =>
       action({ ...deps, actions: _.omit(actions, [name]) })
-    );
-  });
+    )
+  })
 
-  return _.mapValues(actions, initAction => initAction());
-};
+  return _.mapValues(actions, initAction => initAction())
+}
 
-export { buildReducers, buildActions };
+export { buildReducers, buildActions }
