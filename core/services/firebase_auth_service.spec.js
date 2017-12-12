@@ -28,10 +28,10 @@ describe('FirebaseAuthService', () => {
 
     it('Retrieves the authorized user from firebase if authorization is already complete', done => {
       const authenticatedUser = firebaseUserMock({
-        emailAddress: 'test@example.com',
+        email: 'test@example.com',
       })
       const persistedUser = firebaseUserMock({
-        emailAddress: 'WillBeIgnored',
+        email: 'WillBeIgnored',
       })
       firebaseAuthService.auth.mock.setState({
         authenticatedUser,
@@ -48,7 +48,7 @@ describe('FirebaseAuthService', () => {
 
     it('Retrieves the authorized user from firebase authorization is persisted', done => {
       const persistedUser = firebaseUserMock({
-        emailAddress: 'persisted-test@example.com',
+        email: 'persisted-test@example.com',
       })
       firebaseAuthService.auth.mock.setState({ persistedUser })
       firebaseAuthService.getAuthorizedUser().then(user => {
@@ -88,11 +88,11 @@ describe('FirebaseAuthService', () => {
   describe('createUserWithEmailAndPassword', () => {
     it('Creates new user accounts with an email and password', done => {
       const newUser = firebaseUserMock({
-        emailAddress: 'newUser1@example.com',
+        email: 'newUser1@example.com',
       })
       const password = 'myBestPassword1'
       firebaseAuthService
-        .createUserWithEmailAndPassword(newUser.emailAddress, password)
+        .createUserWithEmailAndPassword(newUser.email, password)
         .then(user => {
           expect(user).toEqual(newUser)
           expect(
@@ -102,7 +102,7 @@ describe('FirebaseAuthService', () => {
           expect(
             firebaseAuthService.auth.createUserWithEmailAndPassword.mock
               .calls[0][0]
-          ).toBe(newUser.emailAddress)
+          ).toBe(newUser.email)
           expect(
             firebaseAuthService.auth.createUserWithEmailAndPassword.mock
               .calls[0][1]
@@ -113,11 +113,11 @@ describe('FirebaseAuthService', () => {
 
     it('Pipes a firebase error back to the callee', done => {
       const error = firebaseAuthErrorMock('bad login error')
-      const emailAddress = 'bad@email'
+      const email = 'bad@email'
       const password = '2shrt'
       firebaseAuthService.auth.mock.setState({ error })
       firebaseAuthService
-        .createUserWithEmailAndPassword(emailAddress, password)
+        .createUserWithEmailAndPassword(email, password)
         .catch(err => {
           expect(err).toBe(error)
           expect(
@@ -127,7 +127,7 @@ describe('FirebaseAuthService', () => {
           expect(
             firebaseAuthService.auth.createUserWithEmailAndPassword.mock
               .calls[0][0]
-          ).toBe(emailAddress)
+          ).toBe(email)
           expect(
             firebaseAuthService.auth.createUserWithEmailAndPassword.mock
               .calls[0][1]
@@ -139,30 +139,30 @@ describe('FirebaseAuthService', () => {
 
   describe('sendPasswordResetEmail', () => {
     it('Sends a password reset email', done => {
-      const emailAddress = 'myforgetfulself@example.com'
-      firebaseAuthService.sendPasswordResetEmail(emailAddress).then(() => {
+      const email = 'myforgetfulself@example.com'
+      firebaseAuthService.sendPasswordResetEmail(email).then(() => {
         expect(
           firebaseAuthService.auth.sendPasswordResetEmail.mock.calls.length
         ).toBe(1)
         expect(
           firebaseAuthService.auth.sendPasswordResetEmail.mock.calls[0][0]
-        ).toBe(emailAddress)
+        ).toBe(email)
         done()
       })
     })
 
     it('Pipes a firebase error back to the callee', done => {
-      const emailAddress = 'myforgetfulself@example.com'
+      const email = 'myforgetfulself@example.com'
       const error = firebaseAuthErrorMock('unknown error occurred')
       firebaseAuthService.auth.mock.setState({ error })
-      firebaseAuthService.sendPasswordResetEmail(emailAddress).catch(err => {
+      firebaseAuthService.sendPasswordResetEmail(email).catch(err => {
         expect(err).toEqual(error)
         expect(
           firebaseAuthService.auth.sendPasswordResetEmail.mock.calls.length
         ).toBe(1)
         expect(
           firebaseAuthService.auth.sendPasswordResetEmail.mock.calls[0][0]
-        ).toBe(emailAddress)
+        ).toBe(email)
         done()
       })
     })
@@ -171,11 +171,11 @@ describe('FirebaseAuthService', () => {
   describe('signInWithEmailAndPassword', () => {
     it('Signs in with an email and password', done => {
       const authenticatedUser = firebaseUserMock({
-        emailAddress: 'newUser2@example.com',
+        email: 'newUser2@example.com',
       })
       const password = 'myBestPassword2'
       firebaseAuthService
-        .signInWithEmailAndPassword(authenticatedUser.emailAddress, password)
+        .signInWithEmailAndPassword(authenticatedUser.email, password)
         .then(user => {
           expect(user).toEqual(authenticatedUser)
           expect(
@@ -184,7 +184,7 @@ describe('FirebaseAuthService', () => {
           ).toBe(1)
           expect(
             firebaseAuthService.auth.signInWithEmailAndPassword.mock.calls[0][0]
-          ).toBe(authenticatedUser.emailAddress)
+          ).toBe(authenticatedUser.email)
           expect(
             firebaseAuthService.auth.signInWithEmailAndPassword.mock.calls[0][1]
           ).toBe(password)

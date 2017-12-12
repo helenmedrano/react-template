@@ -41,19 +41,19 @@ const firebaseAuthMock = (firebaseState = {}) => {
         state.error ? onError(state.error) : onSuccess(state.persistedUser)
     ),
     createUserWithEmailAndPassword: mi(
-      emailAddress =>
+      email =>
         state.error
           ? Promise.reject(state.error)
-          : Promise.resolve(firebaseUserMock({ emailAddress }))
+          : Promise.resolve(firebaseUserMock({ email }))
     ),
     sendPasswordResetEmail: mi(
       () => (state.error ? Promise.reject(state.error) : Promise.resolve())
     ),
     signInWithEmailAndPassword: mi(
-      emailAddress =>
+      email =>
         state.error
           ? Promise.reject(state.error)
-          : Promise.resolve(firebaseUserMock({ emailAddress }))
+          : Promise.resolve(firebaseUserMock({ email }))
     ),
     signOut: mi(
       () => (state.error ? Promise.reject(state.error) : Promise.resolve())
