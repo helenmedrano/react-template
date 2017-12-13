@@ -6,7 +6,7 @@ import colors from 'todo/styles/colors'
 import { clearFix } from 'todo/styles/mixins'
 
 import TextInput from 'todo/components/text_input'
-import Button from 'todo/components/button'
+import Button from 'core/components/button'
 
 const CreateTodoForm = styled.form`
   ${clearFix()} width: 100%;
@@ -16,12 +16,12 @@ const CreateTodoForm = styled.form`
 
 const TodoInput = styled(TextInput)`margin-bottom: 5px;`
 
-const SubmitTodo = styled(Button)`
+const SubmitTodo = Button.extend`
   float: right;
-  border-radius: 0 0 5px 5px;
 
   &:disabled {
-    background: ${colors.disabled};
+    border-color: ${colors.disabled};
+    color: ${colors.disabled};
   }
 `
 
@@ -51,7 +51,9 @@ class CreateTodo extends Component {
           onChange={e => this.setState({ input: e.target.value })}
           value={input}
         />
-        <SubmitTodo disabled={input.length === 0}>Create</SubmitTodo>
+        <SubmitTodo type="submit" disabled={input.length === 0}>
+          Create
+        </SubmitTodo>
       </CreateTodoForm>
     )
   }

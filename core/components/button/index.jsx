@@ -1,20 +1,47 @@
+import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import colors from 'core/styles/colors'
-import { transitions } from 'core/styles/mixins'
+const BaseButton = ({ children, type, ...other }) => (
+  <button type={type} {...other}>
+    {children}
+  </button>
+)
 
-const Button = styled.button`
-  ${transitions(['background'])} background: ${colors.white};
-  border-radius: 4px;
-  border: 1px solid ${colors.bg};
-  color: ${colors.bg};
+BaseButton.defaultProps = {
+  type: 'button',
+}
+
+BaseButton.propTypes = {
+  children: PropTypes.node.isRequired,
+  type: PropTypes.oneOf(['button', 'submit', 'reset']),
+}
+
+const Button = styled(BaseButton)`
+  color: '#333';
+  margin: 0.25em;
   cursor: pointer;
-  outline: none;
-  padding: 10px 20px;
-  text-align: center;
+  border: ${({ basic }) => (basic ? 'none' : '1px solid #333')};
+  padding: ${({ basic }) => (basic ? '0' : '0.5em 1em')};
+  background: ${({ basic }) => (basic ? 'rgba(0, 0, 0, 0)' : 'white')};
 
   &:hover {
-    background: ${colors.grayDA};
+    ${({ basic }) =>
+      basic
+        ? `
+      text-decoration: underline;`
+        : `
+      color: white;
+      background: #404a65;
+    `};
+  }
+
+  &:disabled {
+    color: #ccc;
+    border-color: #ccc;
+    background: ${({ basic }) => (basic ? 'rgba(0, 0, 0, 0)' : 'white')};
+    cursor: unset;
+    text-decoration: none;
   }
 `
 
