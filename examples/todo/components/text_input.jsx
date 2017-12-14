@@ -2,26 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 
 import colors from 'todo/styles/colors'
-import transitions from 'todo/styles/transitions'
+import { Input } from 'core/components/input'
 
-const StyledInput = styled.input`
-  ${transitions.focus('color')} ${transitions.focus(
-      'border-color'
-    )} border-radius: 3px;
-  border: 1px solid ${colors.border};
-  box-sizing: border-box;
+const StyledInput = styled(Input)`
+  border-color: ${colors.border};
   color: ${colors.text};
-  font-weight: 500;
-  outline: none;
-  padding: 10px;
-
-  &::placeholder {
-    color: ${colors.lightText};
-  }
-
-  &:focus {
-    border-color: ${colors.text};
-  }
 `
 
 const TextInput = props => <StyledInput type="text" {...props} />
