@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import t from 'i18n'
+import { t } from 'i18n'
 import colors from 'todo/styles/colors'
 
 const Header = styled.div`
