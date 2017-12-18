@@ -8,17 +8,38 @@ const StyledLabel = styled.label`
   color: ${({ inverted }) => (inverted ? '#c6c6c6' : '#333')};
 `
 
-const LabeledInput = ({ label, id, inverted, ...other }) => (
-  <StyledLabel inverted={inverted} htmlFor={id}>
+const LabeledInput = ({ className, label, id, inverted, ...other }) => (
+  <StyledLabel className={className} inverted={inverted} htmlFor={id}>
     {label}
     <Input labeled inverted={inverted} {...other} />
   </StyledLabel>
 )
 
+LabeledInput.defaultProps = {
+  inverted: false,
+}
+
 LabeledInput.propTypes = {
+  /** 
+   * Ignore common React component props
+   * @ignore 
+   */
+  className: PropTypes.string,
+
+  /**
+   * Inverts the colorization of the label and input
+   */
   inverted: PropTypes.bool,
-  label: PropTypes.string,
-  id: PropTypes.string,
+
+  /**
+   * The text to use as the label
+   */
+  label: PropTypes.string.isRequired,
+
+  /**
+   * Id used for input and "for" attribute in associated label
+   */
+  id: PropTypes.string.isRequired,
 }
 
 export default LabeledInput

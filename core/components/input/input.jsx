@@ -1,8 +1,7 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const StyledInput = styled.input`
+const Input = styled.input`
   height: 2.5em;
   box-sizing: border-box;
   border-width: 1px;
@@ -26,14 +25,16 @@ const StyledInput = styled.input`
   }
 `
 
-const Input = ({ label, id, inverted, ...other }) => (
-  <StyledInput inverted={inverted} {...other} />
-)
-
-Input.propTypes = {
-  inverted: PropTypes.bool,
-  label: PropTypes.string,
-  id: PropTypes.string,
+Input.defaultProps = {
+  inverted: false,
 }
 
+Input.propTypes = {
+  /**
+   * Inverts the colorization of the input
+   */
+  inverted: PropTypes.bool,
+}
+
+/** @component */
 export default Input

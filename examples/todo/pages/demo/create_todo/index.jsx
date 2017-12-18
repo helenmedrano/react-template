@@ -16,7 +16,7 @@ const CreateTodoForm = styled.form`
 
 const TodoInput = styled(TextInput)`margin-bottom: 5px;`
 
-const SubmitTodo = Button.extend`
+const SubmitTodo = styled(Button)`
   float: right;
 
   &:disabled {

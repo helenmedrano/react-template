@@ -1,23 +1,7 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const BaseButton = ({ children, type, ...other }) => (
-  <button type={type} {...other}>
-    {children}
-  </button>
-)
-
-BaseButton.defaultProps = {
-  type: 'button',
-}
-
-BaseButton.propTypes = {
-  children: PropTypes.node.isRequired,
-  type: PropTypes.oneOf(['button', 'submit', 'reset']),
-}
-
-const Button = styled(BaseButton)`
+const Button = styled.button`
   color: '#333';
   margin: 0.25em;
   cursor: pointer;
@@ -45,4 +29,21 @@ const Button = styled(BaseButton)`
   }
 `
 
+Button.defaultProps = {
+  type: 'button',
+}
+
+Button.propTypes = {
+  /**
+   * The inner content of the button
+   */
+  children: PropTypes.node.isRequired,
+
+  /**
+   * The button type
+   */
+  type: PropTypes.oneOf(['button', 'submit', 'reset']),
+}
+
+/** @component */
 export default Button

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const getMessageColors = type => {
+  /* info message */
   let colors = { text: '#333', bg: '#ccc', border: '#555' }
 
   if (type === 'error') {
@@ -26,13 +27,24 @@ const StyledMessageContainer = styled.p`
   ${({ type }) => getMessageColors(type)};
 `
 
-const Message = ({ children }) => (
-  <StyledMessageContainer>{children}</StyledMessageContainer>
+const Message = ({ children, type }) => (
+  <StyledMessageContainer type={type}>{children}</StyledMessageContainer>
 )
 
+Message.defaultProps = {
+  type: 'info',
+}
+
 Message.propTypes = {
+  /**
+   * The message content
+   */
   children: PropTypes.node.isRequired,
-  type: PropTypes.oneOf(['error']),
+
+  /**
+   * The type of message
+   */
+  type: PropTypes.oneOf(['error', 'info']),
 }
 
 export default Message
