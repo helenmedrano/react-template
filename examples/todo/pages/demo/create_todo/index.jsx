@@ -6,7 +6,7 @@ import colors from 'todo/styles/colors'
 import { clearFix } from 'todo/styles/mixins'
 
 import TextInput from 'todo/components/text_input'
-import Button from 'core/components/button'
+import { Button } from 'core/components/button'
 
 const CreateTodoForm = styled.form`
   ${clearFix()} width: 100%;
