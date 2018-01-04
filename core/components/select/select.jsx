@@ -64,7 +64,10 @@ class Select extends React.Component {
   }
 
   handleClick = event => {
-    this.setState({ open: !this.state.open, anchor: event.currentTarget })
+    event.persist()
+    this.setState(prevState => {
+      return { open: !prevState.open, anchor: event.target }
+    })
   }
 
   handleOptionSelect = value => {
