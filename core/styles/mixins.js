@@ -5,6 +5,17 @@ const defaultTransitionOptions = {
   timingFunction: 'ease',
 }
 
+const clearFix = () => `
+  zoom: 1;
+  &:after, &:before {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+`
+
 const transitions = (properties, options = defaultTransitionOptions) => {
   const attributes = _.chain(properties)
     .map(x => `${x} ${options.duration} ${options.timingFunction}`)
@@ -14,4 +25,10 @@ const transitions = (properties, options = defaultTransitionOptions) => {
   return `transition: ${attributes}`
 }
 
-export { transitions }
+const truncate = () => `
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+`
+
+export { clearFix, transitions, truncate }
