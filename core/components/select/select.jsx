@@ -55,9 +55,11 @@ class Select extends React.Component {
   get selected() {
     return R.compose(
       R.defaultTo(this.placeholder),
-      R.head,
-      R.map(({ text, value }) => text || startCase(value)),
-      R.filter(R.propEq('value', this.props.value))
+      R.when(
+        R.complement(R.isNil),
+        ({ text, value }) => text || startCase(value)
+      ),
+      R.find(R.propEq('value', this.props.value))
     )(this.props.options)
   }
 
