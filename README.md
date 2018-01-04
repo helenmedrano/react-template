@@ -16,3 +16,14 @@ $ yarn dev
 ```
 
 Once webpack is finished building it should instruct you to open your browser to `http://localhost:3000`
+
+## Example Applications
+
+### Firebase Authentication
+
+To use the firebase authentication example, ensure the following environmental variables are set.
+
+```bash
+export FIREBASE_API_KEY=MY_FIREBASE_API_KEY
+export FIREBASE_AUTH_DOMAIN=MY_FIREBASE_PROJECT_AUTH_DOMAIN
+```

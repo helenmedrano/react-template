@@ -11,7 +11,7 @@ const StyledLabel = styled.label`
 const LabeledInput = ({ className, label, id, inverted, ...other }) => (
   <StyledLabel className={className} inverted={inverted} htmlFor={id}>
     {label}
-    <Input labeled inverted={inverted} {...other} />
+    <Input labeled id={id} inverted={inverted} {...other} />
   </StyledLabel>
 )
 

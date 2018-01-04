@@ -1,7 +1,7 @@
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const _ = require('lodash');
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const _ = require('lodash')
 
 const paths = {
   app: path.resolve(__dirname, 'app'),
@@ -10,29 +10,39 @@ const paths = {
   out: path.resolve(__dirname, 'dist'),
   i18n: path.resolve(__dirname, 'examples', 'todo', 'utils', 'i18n'),
   logger: path.resolve(__dirname, 'core', 'globals', 'logger'),
-};
+}
 
 const apps = {
   app: paths.app,
   todo: path.resolve(__dirname, 'examples', 'todo'),
-};
+  firebase_authentication: path.resolve(
+    __dirname,
+    'examples',
+    'firebase_authentication'
+  ),
+}
 
-const appEntries = _.mapValues(apps, function(value) {
-  return ['babel-polyfill', path.join(value, './index.jsx')];
-});
+const appEntries = _.mapValues(apps, value => [
+  'babel-polyfill',
+  path.join(value, './index.jsx'),
+])
 
-const appHtmlEntries = _.map(apps, function(value, key) {
-  return new HtmlWebpackPlugin({
-    inject: true,
-    chunks: [key],
-    filename: key === 'app' ? 'index.html' : path.join(key, 'index.html'),
-    template: paths.htmlTemplate,
-  });
-});
+const appHtmlEntries = _.map(
+  apps,
+  (value, key) =>
+    new HtmlWebpackPlugin({
+      inject: true,
+      chunks: [key],
+      filename: key === 'app' ? 'index.html' : path.join(key, 'index.html'),
+      template: paths.htmlTemplate,
+    })
+)
 
 const env = {
-  'NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-};
+  NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+  FIREBASE_API_KEY: JSON.stringify(process.env.FIREBASE_API_KEY),
+  FIREBASE_AUTH_DOMAIN: JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN),
+}
 
 const baseConfig = {
   entry: appEntries,
@@ -43,11 +53,14 @@ const baseConfig = {
   resolve: {
     extensions: ['.js', '.jsx'],
     modules: ['node_modules'],
-    alias: _.merge({
-      i18n: paths.i18n,
-      logger: paths.logger,
-      core: paths.core,
-    }, apps),
+    alias: _.merge(
+      {
+        i18n: paths.i18n,
+        logger: paths.logger,
+        core: paths.core,
+      },
+      apps
+    ),
   },
   module: {
     rules: [
@@ -59,15 +72,15 @@ const baseConfig = {
     ],
   },
   plugins: [
-    new webpack.ProvidePlugin({ 'logger': 'logger' }),
+    new webpack.ProvidePlugin({ logger: 'logger' }),
     new webpack.DefinePlugin({ 'process.env': env }),
   ],
   externals: {
-    'cheerio': 'window',
+    cheerio: 'window',
     'react/addons': 'react',
     'react/lib/ExecutionEnvironment': 'react',
     'react/lib/ReactContext': 'react',
   },
 }
 
-module.exports = { baseConfig, paths, apps, appHtmlEntries };
+module.exports = { baseConfig, paths, apps, appHtmlEntries }

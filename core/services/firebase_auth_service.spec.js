@@ -10,9 +10,9 @@ describe('FirebaseAuthService', () => {
     firebaseAuthService = new FirebaseAuthService(firebaseAppMock)
   })
 
-  describe('getAuthorizedUser', () => {
+  describe('getAuthenticatedUser', () => {
     it('Retrieves null when user is not authenticated', done =>
-      firebaseAuthService.getAuthorizedUser().then(user => {
+      firebaseAuthService.getAuthenticatedUser().then(user => {
         expect(user).toBe(null)
         expect(
           firebaseAuthService.auth.onAuthStateChanged.mock.calls.length
@@ -37,7 +37,7 @@ describe('FirebaseAuthService', () => {
         authenticatedUser,
         persistedUser,
       })
-      firebaseAuthService.getAuthorizedUser().then(user => {
+      firebaseAuthService.getAuthenticatedUser().then(user => {
         expect(user).toEqual(authenticatedUser)
         expect(
           firebaseAuthService.auth.onAuthStateChanged.mock.calls.length
@@ -51,7 +51,7 @@ describe('FirebaseAuthService', () => {
         email: 'persisted-test@example.com',
       })
       firebaseAuthService.auth.mock.setState({ persistedUser })
-      firebaseAuthService.getAuthorizedUser().then(user => {
+      firebaseAuthService.getAuthenticatedUser().then(user => {
         expect(user).toEqual(persistedUser)
         expect(
           firebaseAuthService.auth.onAuthStateChanged.mock.calls.length
@@ -69,7 +69,7 @@ describe('FirebaseAuthService', () => {
     it('Pipes Firebase authentication errors back to the callee', done => {
       const error = firebaseAuthErrorMock('An auth error occurred!')
       firebaseAuthService.auth.mock.setState({ error })
-      firebaseAuthService.getAuthorizedUser().catch(err => {
+      firebaseAuthService.getAuthenticatedUser().catch(err => {
         expect(err).toBe(error)
         expect(
           firebaseAuthService.auth.onAuthStateChanged.mock.calls.length

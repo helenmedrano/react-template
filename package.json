@@ -76,6 +76,7 @@
     "react-svg-loader": "^1.1.1",
     "react-test-renderer": "^15.6.1",
     "redux-devtools-extension": "^2.13.2",
+    "redux-mock-store": "^1.3.0",
     "source-map-support": "^0.4.18",
     "style-loader": "^0.18.2",
     "svg-loader": "^0.0.2",
@@ -94,7 +95,8 @@
       "\\.(css)$": "<rootDir>/test/styleMock.js",
       "^core(.*)$": "<rootDir>/core/$1",
       "^app(.*)$": "<rootDir>/app/$1",
-      "^todo(.*)$": "<rootDir>/examples/todo/$1"
+      "^todo(.*)$": "<rootDir>/examples/todo/$1",
+      "^firebase_authentication(.*)$": "<rootDir>/examples/firebase_authentication/$1"
     }
   }
 }

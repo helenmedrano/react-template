@@ -11,7 +11,7 @@ class FirebaseAuthService {
    *   to occur in the Firebase Authentication library
    * @return {Promise<Object>} The authenticated user or null (if no authorized user)
    */
-  getAuthorizedUser() {
+  getAuthenticatedUser() {
     // Short curcuit the asynchronous check by seeing if currentUser is set
     if (this.auth.currentUser) {
       return Promise.resolve(this.auth.currentUser)
