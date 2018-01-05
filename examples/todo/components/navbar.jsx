@@ -28,7 +28,7 @@ const Navbar = props => (
 
 Navbar.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.arrayOf(PropTypes.element),
+  children: PropTypes.node,
 }
 
 export default Navbar
