@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-
 import colors from 'todo/styles/colors'
 import { Input } from 'core/components/input'
 

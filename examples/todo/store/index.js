@@ -1,5 +1,4 @@
 import buildStore from 'core/builders/store'
-
 import { reducers } from './partitions'
 import initState from './init_state'
 

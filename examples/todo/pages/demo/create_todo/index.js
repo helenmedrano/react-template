@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-
 import colors from 'todo/styles/colors'
 import { clearFix } from 'core/styles/mixins'
-
 import TextInput from 'todo/components/text_input'
-import { Button } from 'core/components/button'
+import Button from 'core/components/button'
 
 const CreateTodoForm = styled.form`
   ${clearFix()};
@@ -61,7 +59,7 @@ class CreateTodo extends Component {
 }
 
 CreateTodo.propTypes = {
-  create: PropTypes.func,
+  create: PropTypes.func.isRequired,
 }
 
 export default CreateTodo

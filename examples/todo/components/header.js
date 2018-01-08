@@ -1,5 +1,4 @@
 import React from 'react'
-
 import NavigationBar from 'todo/components/navbar'
 
 const Header = () => (

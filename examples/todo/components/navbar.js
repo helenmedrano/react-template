@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-
 import colors from 'todo/styles/colors'
 import widths from 'todo/styles/widths'
 
@@ -26,9 +25,13 @@ const Navbar = props => (
   </NavbarWrapper>
 )
 
+Navbar.defaultProps = {
+  className: '',
+}
+
 Navbar.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
 }
 
 export default Navbar

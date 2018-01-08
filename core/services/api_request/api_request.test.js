@@ -1,6 +1,6 @@
+import axiosMock from 'core/test/axios_mock'
 import ApiRequest from './api_request'
 import { PathNotFoundErr, ParamRequiredErr } from './api_request_error'
-import axiosMock from '../../test/axios_mock'
 
 const pathMap = {
   caliber: '/caliber',
@@ -11,17 +11,13 @@ const pathMap = {
 describe('Libraries - Api request', () => {
   describe('Instantiation', () => {
     test('should throw pathMap option is required', () => {
-      function instantiate() {
-        return new ApiRequest({ baseURL: 'testing.com' })
-      }
+      const instantiate = () => new ApiRequest({ baseURL: 'testing.com' })
 
       expect(instantiate).toThrowError('pathMap option is required')
     })
 
     test('should throw baseURL option is required', () => {
-      function instantiate() {
-        return new ApiRequest({ pathMap })
-      }
+      const instantiate = () => new ApiRequest({ pathMap })
 
       expect(instantiate).toThrowError('baseURL option is required')
     })
@@ -37,7 +33,7 @@ describe('Libraries - Api request', () => {
 
     describe('_getPath', () => {
       test('should throw path not found error', () => {
-        function failedFn() {
+        const failedFn = () => {
           apiCall._getPath('testPath')
         }
 
@@ -51,10 +47,10 @@ describe('Libraries - Api request', () => {
 
     describe('_transformParams', () => {
       test('should throw params are missing error', () => {
-        function failedFn() {
+        const failedFn = () => {
           ApiRequest._transformParams(pathMap.caliberById)
         }
-        function failedFn2() {
+        const failedFn2 = () => {
           ApiRequest._transformParams(pathMap.caliberById, {
             notThisParam: 'test',
           })

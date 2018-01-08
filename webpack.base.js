@@ -24,7 +24,7 @@ const apps = {
 
 const appEntries = _.mapValues(apps, value => [
   'babel-polyfill',
-  path.join(value, './index.jsx'),
+  path.join(value, './index.js'),
 ])
 
 const appHtmlEntries = _.map(
@@ -51,7 +51,7 @@ const baseConfig = {
     filename: '[name]/[hash].js',
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js'],
     modules: ['node_modules'],
     alias: _.merge(
       {
@@ -65,7 +65,7 @@ const baseConfig = {
   module: {
     rules: [
       { test: /\.css/, use: ['style-loader', 'css-loader'] },
-      { test: /\.jsx?$/, use: ['babel-loader'], exclude: /node_modules/ },
+      { test: /\.js$/, use: ['babel-loader'], exclude: /node_modules/ },
       { test: /\.pug$/, use: ['pug-loader'] },
       { test: /\.svg$/, use: ['babel-loader', 'react-svg-loader'] },
       { test: /\.(jpg|png|ico)$/, use: ['file-loader'] },

@@ -3,7 +3,6 @@ import * as R from 'ramda'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { startCase } from 'lodash'
-
 import { truncate } from 'core/styles/mixins'
 import SelectOption from './select_option'
 import SelectOptionMenu from './select_option_menu'
@@ -80,7 +79,7 @@ class Select extends React.Component {
   }
 
   render() {
-    const { children, className, onBlur, onFocus, ...other } = this.props
+    const { className, onBlur, onFocus, ...other } = this.props
 
     return (
       <StyledRootContainer className={className}>
@@ -121,21 +120,24 @@ class Select extends React.Component {
 
 Select.defaultProps = {
   placeholder: '--',
+  className: '',
+  onBlur: R.identity,
+  onFocus: R.identity,
 }
 
 Select.propTypes = {
-  /** 
+  /**
    * Ignore common React component props
-   * @ignore 
+   * @ignore
    */
   className: PropTypes.string,
 
   /**
-   * Called with pseudo select box's blur event 
+   * Called with pseudo select box's blur event
    */
   onBlur: PropTypes.func,
   /**
-   * Called with pseudo select box's focus event 
+   * Called with pseudo select box's focus event
    */
   onFocus: PropTypes.func,
   /**

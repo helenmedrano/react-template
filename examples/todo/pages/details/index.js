@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-
 import { t } from 'i18n'
 import colors from 'todo/styles/colors'
 import NavigationLink from 'todo/components/navigation_link'

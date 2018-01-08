@@ -19,6 +19,10 @@ const Backdrop = props => (
   </Portal>
 )
 
+Backdrop.defaultProps = {
+  active: false,
+}
+
 Backdrop.propTypes = {
   active: PropTypes.bool,
 }

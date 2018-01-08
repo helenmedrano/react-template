@@ -1,7 +1,6 @@
 import buildStore from 'core/builders/store'
 import { buildActions, buildReducers } from 'core/builders/partitions'
 import TodoService from 'todo/services/todo_service'
-
 import todoPartitions from './todo'
 
 describe('partitions - todos', () => {

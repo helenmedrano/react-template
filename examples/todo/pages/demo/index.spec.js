@@ -1,6 +1,5 @@
 import React from 'react'
 import { mount } from 'enzyme'
-
 import List, { components } from 'todo/components/list'
 import { TodoComponent } from './'
 

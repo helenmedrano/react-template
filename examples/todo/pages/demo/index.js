@@ -3,11 +3,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import _ from 'lodash'
-
 import { actions } from 'todo/store/partitions'
 import Tabs from 'todo/components/tabs'
 import List from 'todo/components/list'
-
 import CreateTodo from './create_todo'
 
 const DemoContainer = styled.div`
@@ -87,9 +85,9 @@ TodoComponent.propTypes = {
       todo: PropTypes.string,
       completed: PropTypes.bool,
     })
-  ),
-  toggleTodo: PropTypes.func,
-  createTodo: PropTypes.func,
+  ).isRequired,
+  toggleTodo: PropTypes.func.isRequired,
+  createTodo: PropTypes.func.isRequired,
 }
 
 const mapState = state => {

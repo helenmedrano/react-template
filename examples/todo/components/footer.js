@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-
 import { links } from 'todo/constants'
 import NavigationBar from 'todo/components/navbar'
 import TwitterIcon from 'todo/assets/icons/twitter.svg'

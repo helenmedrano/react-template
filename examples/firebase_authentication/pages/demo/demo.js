@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-
 import { Message } from 'core/components/message'
 import AuthContainer from 'firebase_authentication/components/auth_container'
 
@@ -79,6 +78,11 @@ class Demo extends React.Component {
       </StyledRootContainer>
     )
   }
+}
+
+Demo.defaultProps = {
+  error: null,
+  user: null,
 }
 
 Demo.propTypes = {

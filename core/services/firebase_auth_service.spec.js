@@ -1,7 +1,7 @@
+import firebaseAppMock from 'core/test/firebase_app_mock'
+import firebaseUserMock from 'core/test/firebase_user_mock'
+import firebaseAuthErrorMock from 'core/test/firebase_auth_error_mock'
 import FirebaseAuthService from './firebase_auth_service'
-import firebaseAppMock from '../test/firebase_app_mock'
-import firebaseUserMock from '../test/firebase_user_mock'
-import firebaseAuthErrorMock from '../test/firebase_auth_error_mock'
 
 describe('FirebaseAuthService', () => {
   let firebaseAuthService

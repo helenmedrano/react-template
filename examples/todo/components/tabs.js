@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-
 import colors from 'todo/styles/colors'
 
 const Tab = styled.div`
@@ -38,8 +37,8 @@ Tabs.propTypes = {
       value: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
       active: PropTypes.bool,
     })
-  ),
-  tabClick: PropTypes.func,
+  ).isRequired,
+  tabClick: PropTypes.func.isRequired,
 }
 
 export default Tabs

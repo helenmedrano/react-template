@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-
 import Backdrop from './backdrop'
 
 const StyledRootContainer = styled.div`
@@ -30,6 +29,11 @@ const SelectOptionMenu = ({ onClose, open, ...other }) => (
     <StyledRootContainer open={open} {...other} />
   </div>
 )
+
+SelectOptionMenu.defaultProps = {
+  anchor: null,
+  className: '',
+}
 
 SelectOptionMenu.propTypes = {
   anchor: PropTypes.shape({

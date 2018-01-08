@@ -1,6 +1,5 @@
 import React from 'react'
 import { mount, shallow } from 'enzyme'
-
 import firebaseUserMock from 'core/test/firebase_user_mock'
 import AuthContainer from 'firebase_authentication/components/auth_container'
 import Demo from './demo'

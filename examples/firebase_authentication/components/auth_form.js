@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-
-import { Button } from 'core/components/button'
+import Button from 'core/components/button'
 import EmailAddressInput from './email_address_input'
 import PasswordInput from './password_input'
 
@@ -51,6 +50,10 @@ const AuthForm = ({
     </form>
   </div>
 )
+
+AuthForm.defaultProps = {
+  className: '',
+}
 
 AuthForm.propTypes = {
   className: PropTypes.string,

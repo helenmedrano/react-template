@@ -1,5 +1,4 @@
 import i18n from 'i18n-js'
-
 import enLocale from 'todo/locales/en'
 
 i18n.translations.en = enLocale

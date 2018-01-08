@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-
 import colors from 'todo/styles/colors'
 
 const ListWrapper = styled.div`
@@ -55,13 +54,13 @@ const entryProp = {
 }
 
 CheckboxEntry.propTypes = {
-  toggle: PropTypes.func,
+  toggle: PropTypes.func.isRequired,
   ...entryProp,
 }
 
 List.propTypes = {
-  entries: PropTypes.arrayOf(PropTypes.shape(entryProp)),
-  toggle: PropTypes.func,
+  entries: PropTypes.arrayOf(PropTypes.shape(entryProp)).isRequired,
+  toggle: PropTypes.func.isRequired,
 }
 
 export const components = { CheckboxEntry }

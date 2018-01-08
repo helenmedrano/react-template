@@ -2,10 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-
-// eslint-disable import/no-extraneous-dependencies
 import initStore from 'todo/store'
-
 import AppComponent from 'todo/pages/app'
 import DetailsComponent from 'todo/pages/details'
 import { TodoContainer } from 'todo/pages/demo'

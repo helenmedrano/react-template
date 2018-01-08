@@ -1,6 +1,5 @@
 import configureStore from 'redux-mock-store'
 import reduxThunkMiddleware from 'redux-thunk'
-
 import FirebaseAuthService from 'core/services/firebase_auth_service'
 import firebaseAppMock from 'core/test/firebase_app_mock'
 import firebaseAuthErrorMock from 'core/test/firebase_auth_error_mock'

@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-
 import { actions } from 'firebase_authentication/store/partitions'
 import Demo from './demo'
 

@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-
 import Input from './input'
 
 const StyledLabel = styled.label`
@@ -17,12 +16,13 @@ const LabeledInput = ({ className, label, id, inverted, ...other }) => (
 
 LabeledInput.defaultProps = {
   inverted: false,
+  className: '',
 }
 
 LabeledInput.propTypes = {
-  /** 
+  /**
    * Ignore common React component props
-   * @ignore 
+   * @ignore
    */
   className: PropTypes.string,
 

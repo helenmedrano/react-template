@@ -1,5 +1,4 @@
 import i18n from 'i18n-js'
-
 import { tc } from './i18n'
 
 describe('i18n utils', () => {

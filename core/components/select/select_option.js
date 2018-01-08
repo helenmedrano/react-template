@@ -14,7 +14,7 @@ const StyledRootContainer = styled.div`
 `
 
 const SelectOption = ({ onSelect, value, ...other }) => (
-  <StyledRootContainer onClick={onSelect.bind(null, value)} {...other} />
+  <StyledRootContainer onClick={() => onSelect(value)} {...other} />
 )
 
 SelectOption.propTypes = {
