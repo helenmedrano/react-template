@@ -1,0 +1,16 @@
+[ignore]
+.*/node_modules/findup/test/.*
+
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+module.name_mapper='^app\/\(.*\)$' -> '<PROJECT_ROOT>/app/\1'
+module.name_mapper='^core\/\(.*\)$' -> '<PROJECT_ROOT>/core/\1'
+module.name_mapper='^\(.*\)$' -> '<PROJECT_ROOT>/examples/\1'
+module.name_mapper='.*\.\(svg\|png\|jpg\|gif\)$' -> '<PROJECT_ROOT>/flow/stub/FileStub.js'
+
+[strict]
