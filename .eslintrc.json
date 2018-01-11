@@ -10,5 +10,14 @@
         "config": "webpack.dev.js"
       }
     }
+  },
+  "overrides": {
+    "files": [ "**/*.spec.js", "**/test/*.js" ],
+    "globals": {
+      "logger": true,
+      "expect": true,
+      "sinon": true,
+      "jest": true
+    }
   }
 }
