@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Message } from 'core/components/message'
+import Message from 'core/components/message'
 import AuthContainer from 'firebase_authentication/components/auth_container'
 
 const StyledRootContainer = styled.div`
