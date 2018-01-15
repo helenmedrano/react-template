@@ -27,15 +27,19 @@ const StyledMessageContainer = styled.p`
   ${({ type }) => getMessageColors(type)};
 `
 
-const Message = ({ children, type }) => (
-  <StyledMessageContainer type={type}>{children}</StyledMessageContainer>
-)
+const Message = props => <StyledMessageContainer {...props} />
 
 Message.defaultProps = {
+  className: '',
   type: 'info',
 }
 
 Message.propTypes = {
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+
   /**
    * The message content
    */
