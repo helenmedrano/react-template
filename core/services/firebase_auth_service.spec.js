@@ -7,7 +7,9 @@ describe('FirebaseAuthService', () => {
   let firebaseAuthService
 
   beforeEach(() => {
-    firebaseAuthService = new FirebaseAuthService(firebaseAppMock)
+    firebaseAuthService = new FirebaseAuthService({
+      firebaseApp: firebaseAppMock,
+    })
   })
 
   describe('getAuthenticatedUser', () => {

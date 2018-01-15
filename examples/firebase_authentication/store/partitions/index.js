@@ -6,6 +6,6 @@ import auth from './auth'
 const partitions = { auth }
 
 export const actions = buildActions(partitions, {
-  firebaseAuthService: new FirebaseAuthService(firebaseApp),
+  firebaseAuthService: new FirebaseAuthService({ firebaseApp }),
 })
 export const reducers = buildReducers(partitions)

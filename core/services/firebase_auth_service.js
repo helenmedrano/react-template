@@ -2,12 +2,12 @@ class FirebaseAuthService {
   /**
    * @param {Object} firebaseApp The firebaseApp to authenticate against
    */
-  constructor(firebaseApp) {
+  constructor({ firebaseApp }) {
     this.auth = firebaseApp.auth()
   }
 
-  /** 
-   * Checks if the current user is set or waits for authentication change event 
+  /**
+   * Checks if the current user is set or waits for authentication change event
    *   to occur in the Firebase Authentication library
    * @return {Promise<Object>} The authenticated user or null (if no authorized user)
    */

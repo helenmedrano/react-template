@@ -9,7 +9,9 @@ import { buildActions, buildReducers } from 'core/builders/partitions'
 import auth from './auth'
 
 const partitions = { auth }
-const firebaseAuthService = new FirebaseAuthService(firebaseAppMock)
+const firebaseAuthService = new FirebaseAuthService({
+  firebaseApp: firebaseAppMock,
+})
 const actions = buildActions(partitions, { firebaseAuthService })
 const mockStoreFactory = configureStore([reduxThunkMiddleware])
 const getStore = initialState =>
