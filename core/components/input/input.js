@@ -1,7 +1,15 @@
-import PropTypes from 'prop-types'
+// @flow
+import React from 'react'
 import styled from 'styled-components'
 
-const Input = styled.input`
+type PropsType = {
+  /**
+   * Inverts the colorization of the input
+   */
+  inverted?: boolean,
+}
+
+const StyledInput = styled.input`
   height: 2.5em;
   box-sizing: border-box;
   border-width: 1px;
@@ -25,15 +33,10 @@ const Input = styled.input`
   }
 `
 
+const Input = (props: PropsType) => <StyledInput {...props} />
+
 Input.defaultProps = {
   inverted: false,
-}
-
-Input.propTypes = {
-  /**
-   * Inverts the colorization of the input
-   */
-  inverted: PropTypes.bool,
 }
 
 /** @component */

@@ -1,9 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
 import styled from 'styled-components'
 import widths from 'todo/styles/widths'
 import Header from 'todo/components/header'
 import Footer from 'todo/components/footer'
+
+type PropsType = {
+  children: React.Node,
+}
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,20 +21,12 @@ const Contents = styled.div`
   flex: 1 1 auto;
 `
 
-const App = props => (
+const App = (props: PropsType) => (
   <Wrapper>
     <Header />
     <Contents> {props.children} </Contents>
     <Footer />
   </Wrapper>
 )
-
-App.defaultProps = {
-  children: null,
-}
-
-App.propTypes = {
-  children: PropTypes.element,
-}
 
 export default App

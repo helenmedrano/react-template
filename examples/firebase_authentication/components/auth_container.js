@@ -1,7 +1,15 @@
+// @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import AuthForm from './auth_form'
+
+type PropsType = {
+  email: string,
+  password: string,
+  onFieldChange: Function,
+  onSignIn: Function,
+  onSignUp: Function,
+}
 
 const StyledRootContainer = styled.div`
   width: 350px;
@@ -17,7 +25,7 @@ const AuthContainer = ({
   onFieldChange,
   onSignIn,
   onSignUp,
-}) => (
+}: PropsType) => (
   <StyledRootContainer>
     <AuthForm
       email={email}
@@ -28,13 +36,5 @@ const AuthContainer = ({
     />
   </StyledRootContainer>
 )
-
-AuthContainer.propTypes = {
-  email: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
-  onFieldChange: PropTypes.func.isRequired,
-  onSignIn: PropTypes.func.isRequired,
-  onSignUp: PropTypes.func.isRequired,
-}
 
 export default AuthContainer

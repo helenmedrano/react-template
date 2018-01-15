@@ -1,8 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
 import styled from 'styled-components'
 import colors from 'todo/styles/colors'
 import widths from 'todo/styles/widths'
+
+type PropsType = {
+  children: React.Node,
+  className?: string,
+}
 
 const NavbarWrapper = styled.div`
   width: 100%;
@@ -19,7 +24,7 @@ const Contents = styled.div`
   justify-content: space-between;
 `
 
-const Navbar = props => (
+const Navbar = (props: PropsType) => (
   <NavbarWrapper className={props.className}>
     <Contents>{props.children}</Contents>
   </NavbarWrapper>
@@ -27,11 +32,6 @@ const Navbar = props => (
 
 Navbar.defaultProps = {
   className: '',
-}
-
-Navbar.propTypes = {
-  className: PropTypes.string,
-  children: PropTypes.node.isRequired,
 }
 
 export default Navbar

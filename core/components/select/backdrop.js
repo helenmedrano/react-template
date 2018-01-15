@@ -1,7 +1,11 @@
+// @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Portal } from 'react-portal'
+
+type PropsType = {
+  active?: boolean,
+}
 
 const TransparentDiv = styled.div`
   display: ${({ active }) => (active ? 'block' : 'none')};
@@ -13,7 +17,7 @@ const TransparentDiv = styled.div`
   z-index: 1000;
 `
 
-const Backdrop = props => (
+const Backdrop = (props: PropsType) => (
   <Portal>
     <TransparentDiv {...props} />
   </Portal>
@@ -21,10 +25,6 @@ const Backdrop = props => (
 
 Backdrop.defaultProps = {
   active: false,
-}
-
-Backdrop.propTypes = {
-  active: PropTypes.bool,
 }
 
 /** @ignore */

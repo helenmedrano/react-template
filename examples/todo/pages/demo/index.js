@@ -1,12 +1,31 @@
+// @flow
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import _ from 'lodash'
+import * as R from 'ramda'
 import { actions } from 'todo/store/partitions'
 import Tabs from 'todo/components/tabs'
 import List from 'todo/components/list'
 import CreateTodo from './create_todo'
+
+type TodoType = {
+  id: number,
+  todo: string,
+  completed: boolean,
+}
+
+type PropsType = {
+  todos: Array<TodoType>,
+  toggleTodo: TodoType => *,
+  createTodo: string => *,
+}
+
+type FilterType = 'all' | 'completed' | 'active'
+
+type StateType = {
+  filter: FilterType,
+}
 
 const DemoContainer = styled.div`
   width: 350px;
@@ -20,8 +39,8 @@ const ListContainer = styled(List)`
   margin-bottom: 10px;
 `
 
-class TodoComponent extends Component {
-  constructor(props) {
+class TodoComponent extends Component<PropsType, StateType> {
+  constructor(props: PropsType) {
     super(props)
 
     this.state = {
@@ -60,34 +79,24 @@ class TodoComponent extends Component {
     }
   }
 
+  setFilter = R.when(
+    R.flip(R.contains)(['all', 'completed', 'active']),
+    (filter: FilterType) => this.setState({ filter })
+  )
+
   render() {
     const { toggleTodo, createTodo } = this.props
     return (
       <DemoContainer>
-        <Tabs
-          tabs={this.filters()}
-          tabClick={filter => this.setState({ filter })}
-        />
+        <Tabs tabs={this.filters()} tabClick={this.setFilter} />
         <ListContainer
           entries={this.filterTodos()}
-          toggle={todo => toggleTodo(todo)}
+          toggle={(todo: TodoType) => toggleTodo(todo)}
         />
         <CreateTodo create={createTodo} />
       </DemoContainer>
     )
   }
-}
-
-TodoComponent.propTypes = {
-  todos: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      todo: PropTypes.string,
-      completed: PropTypes.bool,
-    })
-  ).isRequired,
-  toggleTodo: PropTypes.func.isRequired,
-  createTodo: PropTypes.func.isRequired,
 }
 
 const mapState = state => {

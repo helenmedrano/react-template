@@ -12,6 +12,7 @@ dependencies:
 test:
   pre:
     - yarn lint
+    - yarn flow-ci
   override:
     - yarn test-ci
   post:

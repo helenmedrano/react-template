@@ -1,11 +1,59 @@
-import React from 'react'
+// @flow
+import * as React from 'react'
 import * as R from 'ramda'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 import { startCase } from 'lodash'
 import { truncate } from 'core/styles/mixins'
 import SelectOption from './select_option'
 import SelectOptionMenu from './select_option_menu'
+
+type OptionType = {
+  value: number | string,
+  text: string | React.Node,
+}
+
+type PropsType = {
+  /**
+   * Called with pseudo select box's blur event
+   */
+  onBlur: Function,
+
+  /**
+   * Called with pseudo select box's focus event
+   */
+  onFocus: Function,
+
+  /**
+   * Called with the value of the option that has been selected
+   */
+  onSelect: Function,
+
+  /**
+   * The select's options. An array of objects where "value" must be defined and "text" is optional
+   */
+  options: OptionType[],
+
+  /**
+   * The select's placeholder if no option is selected
+   */
+  placeholder?: string,
+
+  /**
+   * The selected value
+   */
+  value: number | string,
+
+  /**
+   * Ignore common React component props
+   * @ignore
+   */
+  className?: string,
+}
+
+type StateType = {
+  anchor: ?Object,
+  open: boolean,
+}
 
 const StyledRootContainer = styled.div`
   position: relative;
@@ -37,8 +85,15 @@ const StyledSelectIcon = styled.span`
   }
 `
 
-class Select extends React.Component {
-  constructor(props) {
+class Select extends React.Component<PropsType, StateType> {
+  static defaultProps = {
+    placeholder: '--',
+    className: '',
+    onBlur: R.identity,
+    onFocus: R.identity,
+  }
+
+  constructor(props: PropsType) {
     super(props)
 
     this.state = {
@@ -47,13 +102,14 @@ class Select extends React.Component {
     }
   }
 
-  get placeholder() {
+  placeholder() {
     return <StyledPlaceholder>{this.props.placeholder}</StyledPlaceholder>
   }
 
-  get selected() {
+  selected() {
+    // $FlowFixMe
     return R.compose(
-      R.defaultTo(this.placeholder),
+      R.defaultTo(this.placeholder()),
       R.when(
         R.complement(R.isNil),
         ({ text, value }) => text || startCase(value)
@@ -62,14 +118,14 @@ class Select extends React.Component {
     )(this.props.options)
   }
 
-  handleClick = event => {
+  handleClick = (event: SyntheticEvent<*>) => {
     event.persist()
     this.setState(prevState => {
       return { open: !prevState.open, anchor: event.target }
     })
   }
 
-  handleOptionSelect = value => {
+  handleOptionSelect = (value: OptionType) => {
     this.props.onSelect(value)
     this.setState({ open: false })
   }
@@ -88,11 +144,10 @@ class Select extends React.Component {
           onBlur={onBlur}
           onFocus={onFocus}
           onClick={this.handleClick}
-          onKeyDown={this.handleKeyDown}
           tabIndex={0}
           {...other}
         >
-          {this.selected}
+          {this.selected()}
         </StyledPseudoSelect>
         <StyledSelectIcon />
         <SelectOptionMenu
@@ -109,59 +164,13 @@ class Select extends React.Component {
               value={option.value}
               onSelect={this.handleOptionSelect}
             >
-              {option.text || startCase(option.value)}
+              {option.text || startCase(R.toString(option.value))}
             </SelectOption>
           ))}
         </SelectOptionMenu>
       </StyledRootContainer>
     )
   }
-}
-
-Select.defaultProps = {
-  placeholder: '--',
-  className: '',
-  onBlur: R.identity,
-  onFocus: R.identity,
-}
-
-Select.propTypes = {
-  /**
-   * Ignore common React component props
-   * @ignore
-   */
-  className: PropTypes.string,
-
-  /**
-   * Called with pseudo select box's blur event
-   */
-  onBlur: PropTypes.func,
-  /**
-   * Called with pseudo select box's focus event
-   */
-  onFocus: PropTypes.func,
-  /**
-   * Called with the value of the option that has been selected
-   */
-  onSelect: PropTypes.func.isRequired,
-  /**
-   * The select's options. An array of objects where "value" must be defined and "text" is optional
-   */
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-        .isRequired,
-      text: PropTypes.node,
-    })
-  ).isRequired,
-  /**
-   * The select's placeholder if no option is selected
-   */
-  placeholder: PropTypes.string,
-  /**
-   * The selected value
-   */
-  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
 }
 
 /** @component */

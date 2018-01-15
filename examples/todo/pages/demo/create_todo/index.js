@@ -1,10 +1,18 @@
+// @flow
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import colors from 'todo/styles/colors'
 import { clearFix } from 'core/styles/mixins'
 import TextInput from 'todo/components/text_input'
 import Button from 'core/components/button'
+
+type PropsType = {
+  create: string => *,
+}
+
+type StateType = {
+  input: string,
+}
 
 const CreateTodoForm = styled.form`
   ${clearFix()};
@@ -24,8 +32,8 @@ const SubmitTodo = styled(Button)`
   }
 `
 
-class CreateTodo extends Component {
-  constructor(props) {
+class CreateTodo extends Component<PropsType, StateType> {
+  constructor(props: PropsType) {
     super(props)
 
     this.state = {
@@ -33,7 +41,7 @@ class CreateTodo extends Component {
     }
   }
 
-  createTodo = e => {
+  createTodo = (e: SyntheticEvent<*>) => {
     e.preventDefault()
     if (this.state.input !== '') {
       this.props.create(this.state.input)
@@ -56,10 +64,6 @@ class CreateTodo extends Component {
       </CreateTodoForm>
     )
   }
-}
-
-CreateTodo.propTypes = {
-  create: PropTypes.func.isRequired,
 }
 
 export default CreateTodo

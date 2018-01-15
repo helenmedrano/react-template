@@ -1,7 +1,18 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
 import styled from 'styled-components'
 import colors from 'todo/styles/colors'
+
+type TabType = {
+  id: string,
+  value: string | React.Node,
+  active: boolean,
+}
+
+type PropsType = {
+  tabs: Array<TabType>,
+  tabClick: string => *,
+}
 
 const Tab = styled.div`
   font-weight: 400;
@@ -17,28 +28,14 @@ const Tab = styled.div`
   }
 `
 
-const Tabs = props => {
-  const onClick = props.tabClick
-  return (
-    <div>
-      {props.tabs.map(({ id, value, active }) => (
-        <Tab key={id} active={active} onClick={() => onClick(id)}>
-          {value}
-        </Tab>
-      ))}
-    </div>
-  )
-}
-
-Tabs.propTypes = {
-  tabs: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-      active: PropTypes.bool,
-    })
-  ).isRequired,
-  tabClick: PropTypes.func.isRequired,
-}
+const Tabs = ({ tabs, tabClick }: PropsType) => (
+  <div>
+    {tabs.map(({ id, value, active }) => (
+      <Tab key={id} active={active} onClick={() => tabClick(id)}>
+        {value}
+      </Tab>
+    ))}
+  </div>
+)
 
 export default Tabs

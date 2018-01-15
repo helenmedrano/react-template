@@ -1,8 +1,19 @@
 {
   "parser": "babel-eslint",
   "extends": "originate/react",
+  "plugins": ["flowtype"],
   "globals": {
     "logger": true
+  },
+  "rules": {
+    "react/prop-types": "off",
+    "flowtype/define-flow-type": 2,
+    "flowtype/no-primitive-constructor-types": 2,
+    "flowtype/no-types-missing-file-annotation": 2,
+    "flowtype/space-after-type-colon": 2,
+    "flowtype/space-before-generic-bracket": 0,
+    "flowtype/space-before-type-colon": 0,
+    "flowtype/union-intersection-spacing": 2
   },
   "settings": {
     "import/resolver": {

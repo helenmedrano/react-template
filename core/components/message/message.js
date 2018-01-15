@@ -1,9 +1,25 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
 import styled from 'styled-components'
 
-const getMessageColors = type => {
-  /* info message */
+type MessageType = 'info' | 'error'
+
+type PropsType = {
+  /**
+   * The message content
+   */
+  children: React.Node,
+  /**
+   * @ignore
+   */
+  className?: string,
+  /**
+   * The type of message specifying the level of the message
+   */
+  type?: MessageType,
+}
+
+const getMessageColors = (type: MessageType): string => {
   let colors = { text: '#333', bg: '#ccc', border: '#555' }
 
   if (type === 'error') {
@@ -27,28 +43,11 @@ const StyledMessageContainer = styled.p`
   ${({ type }) => getMessageColors(type)};
 `
 
-const Message = props => <StyledMessageContainer {...props} />
+const Message = (props: PropsType) => <StyledMessageContainer {...props} />
 
 Message.defaultProps = {
   className: '',
   type: 'info',
-}
-
-Message.propTypes = {
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-
-  /**
-   * The message content
-   */
-  children: PropTypes.node.isRequired,
-
-  /**
-   * The type of message
-   */
-  type: PropTypes.oneOf(['error', 'info']),
 }
 
 export default Message

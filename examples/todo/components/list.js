@@ -1,7 +1,22 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
 import styled from 'styled-components'
 import colors from 'todo/styles/colors'
+
+type BasePropsType = {
+  id: string | number,
+  checked: boolean,
+  value: string | React.Node,
+}
+
+type CheckboxPropsType = BasePropsType & {
+  toggle: BasePropsType => *,
+}
+
+type ListPropsType = {
+  entries: Array<BasePropsType>,
+  toggle: BasePropsType => *,
+}
 
 const ListWrapper = styled.div`
   box-sizing: border-box;
@@ -24,7 +39,7 @@ const ListEntry = styled(BaseEntry)`
   }
 `
 
-const CheckboxEntry = props => (
+const CheckboxEntry = (props: CheckboxPropsType) => (
   <ListEntry>
     <input
       type="checkbox"
@@ -35,7 +50,7 @@ const CheckboxEntry = props => (
   </ListEntry>
 )
 
-const List = props => (
+const List = (props: ListPropsType) => (
   <ListWrapper {...props}>
     {props.entries.map(entry =>
       React.createElement(CheckboxEntry, {
@@ -46,22 +61,6 @@ const List = props => (
     )}
   </ListWrapper>
 )
-
-const entryProp = {
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  checked: PropTypes.bool,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-}
-
-CheckboxEntry.propTypes = {
-  toggle: PropTypes.func.isRequired,
-  ...entryProp,
-}
-
-List.propTypes = {
-  entries: PropTypes.arrayOf(PropTypes.shape(entryProp)).isRequired,
-  toggle: PropTypes.func.isRequired,
-}
 
 export const components = { CheckboxEntry }
 export default List

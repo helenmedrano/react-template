@@ -1,13 +1,39 @@
+// @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Input from './input'
+
+type PropsType = {
+  /**
+   * Id used for input and "for" attribute in associated label
+   */
+  id: string,
+  /**
+   * The text to use as the label
+   */
+  label: string,
+  /**
+   * Inverts the colorization of the label and input
+   */
+  inverted: boolean,
+  /**
+   * Ignore common React component props
+   * @ignore
+   */
+  className?: string,
+}
 
 const StyledLabel = styled.label`
   color: ${({ inverted }) => (inverted ? '#c6c6c6' : '#333')};
 `
 
-const LabeledInput = ({ className, label, id, inverted, ...other }) => (
+const LabeledInput = ({
+  className,
+  label,
+  id,
+  inverted,
+  ...other
+}: PropsType) => (
   <StyledLabel className={className} inverted={inverted} htmlFor={id}>
     {label}
     <Input labeled id={id} inverted={inverted} {...other} />
@@ -15,31 +41,7 @@ const LabeledInput = ({ className, label, id, inverted, ...other }) => (
 )
 
 LabeledInput.defaultProps = {
-  inverted: false,
   className: '',
-}
-
-LabeledInput.propTypes = {
-  /**
-   * Ignore common React component props
-   * @ignore
-   */
-  className: PropTypes.string,
-
-  /**
-   * Inverts the colorization of the label and input
-   */
-  inverted: PropTypes.bool,
-
-  /**
-   * The text to use as the label
-   */
-  label: PropTypes.string.isRequired,
-
-  /**
-   * Id used for input and "for" attribute in associated label
-   */
-  id: PropTypes.string.isRequired,
 }
 
 export default LabeledInput

@@ -1,7 +1,20 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
 import styled from 'styled-components'
 import Backdrop from './backdrop'
+
+type AnchorType = {
+  offsetWidth: number,
+  offsetHeight: number,
+}
+
+type PropsType = {
+  anchor: ?AnchorType,
+  children: React.Node,
+  className?: string,
+  open: boolean,
+  onClose: Function,
+}
 
 const StyledRootContainer = styled.div`
   position: absolute;
@@ -23,7 +36,7 @@ const StyledRootContainer = styled.div`
   }
 `
 
-const SelectOptionMenu = ({ onClose, open, ...other }) => (
+const SelectOptionMenu = ({ onClose, open, ...other }: PropsType) => (
   <div>
     <Backdrop active={open} onClick={onClose} />
     <StyledRootContainer open={open} {...other} />
@@ -31,19 +44,7 @@ const SelectOptionMenu = ({ onClose, open, ...other }) => (
 )
 
 SelectOptionMenu.defaultProps = {
-  anchor: null,
   className: '',
-}
-
-SelectOptionMenu.propTypes = {
-  anchor: PropTypes.shape({
-    offsetWidth: PropTypes.number,
-    offsetHeight: PropTypes.number,
-  }),
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-  open: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
 }
 
 /** @ignore */

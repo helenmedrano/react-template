@@ -1,4 +1,5 @@
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
 import styled from 'styled-components'
 import {
   disabledColor,
@@ -6,6 +7,21 @@ import {
   primaryColor,
   white,
 } from 'core/styles/colors'
+
+type PropsType = {
+  /**
+   * Strips standard button styling
+   */
+  basic?: boolean,
+  /**
+   * The inner content of the button
+   */
+  children: React.Node,
+  /**
+   * The button type
+   */
+  type?: 'button' | 'submit' | 'reset',
+}
 
 const getButtonStyles = ({ basic }) => {
   const styles = {
@@ -40,7 +56,7 @@ const getHoverStyles = ({ basic }) => {
   `
 }
 
-const Button = styled.button`
+const StyledButton = styled.button`
   ${props => getButtonStyles(props)} color: ${primaryTextColor};
   cursor: pointer;
 
@@ -53,27 +69,11 @@ const Button = styled.button`
   }
 `
 
+const Button = (props: PropsType) => <StyledButton {...props} />
+
 Button.defaultProps = {
   basic: false,
   type: 'button',
 }
 
-Button.propTypes = {
-  /**
-   * Strips standard button styling
-   */
-  basic: PropTypes.bool,
-
-  /**
-   * The inner content of the button
-   */
-  children: PropTypes.node.isRequired,
-
-  /**
-   * The button type
-   */
-  type: PropTypes.oneOf(['button', 'submit', 'reset']),
-}
-
-/** @component */
 export default Button

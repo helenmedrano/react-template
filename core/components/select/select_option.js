@@ -1,6 +1,12 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
 import styled from 'styled-components'
+
+type PropsType = {
+  value: number | string,
+  children: React.Node,
+  onSelect: Function,
+}
 
 const StyledRootContainer = styled.div`
   padding: 10px;
@@ -13,15 +19,9 @@ const StyledRootContainer = styled.div`
   }
 `
 
-const SelectOption = ({ onSelect, value, ...other }) => (
+const SelectOption = ({ onSelect, value, ...other }: PropsType) => (
   <StyledRootContainer onClick={() => onSelect(value)} {...other} />
 )
-
-SelectOption.propTypes = {
-  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-  children: PropTypes.node.isRequired,
-  onSelect: PropTypes.func.isRequired,
-}
 
 /** @ignore */
 export default SelectOption

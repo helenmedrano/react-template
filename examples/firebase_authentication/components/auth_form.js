@@ -1,9 +1,18 @@
+// @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Button from 'core/components/button'
 import EmailAddressInput from './email_address_input'
 import PasswordInput from './password_input'
+
+type PropsType = {
+  email: string,
+  password: string,
+  onFieldChange: Function,
+  onSignIn: Function,
+  onSignUp: Function,
+  className?: string,
+}
 
 const StyledHeader = styled.h2`
   text-align: center;
@@ -23,7 +32,7 @@ const AuthForm = ({
   onFieldChange,
   onSignIn,
   onSignUp,
-}) => (
+}: PropsType) => (
   <div className={className}>
     <StyledHeader>Login</StyledHeader>
     <form id="authForm">
@@ -53,15 +62,6 @@ const AuthForm = ({
 
 AuthForm.defaultProps = {
   className: '',
-}
-
-AuthForm.propTypes = {
-  className: PropTypes.string,
-  email: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
-  onFieldChange: PropTypes.func.isRequired,
-  onSignIn: PropTypes.func.isRequired,
-  onSignUp: PropTypes.func.isRequired,
 }
 
 export default AuthForm
