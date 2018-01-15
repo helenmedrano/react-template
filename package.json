@@ -46,6 +46,7 @@
     "babel-preset-stage-0": "^6.22.0",
     "babel-register": "^6.22.0",
     "css-loader": "^0.28.7",
+    "dotenv": "^4.0.0",
     "enzyme": "^2.7.1",
     "eslint": "^4.7.0",
     "eslint-config-originate": "^3.0.0",
@@ -82,7 +83,9 @@
     "webpack-merge": "^4.1.0"
   },
   "jest": {
-    "moduleFileExtensions": ["js"],
+    "moduleFileExtensions": [
+      "js"
+    ],
     "moduleNameMapper": {
       "\\.(jpg|png|ico|ttf|eot)$": "<rootDir>/test/fileMock.js",
       "\\.(svg)$": "<rootDir>/test/svgMock.js",

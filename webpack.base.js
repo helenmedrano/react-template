@@ -1,7 +1,10 @@
 const path = require('path')
+const dotenv = require('dotenv')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const _ = require('lodash')
+
+dotenv.config()
 
 const paths = {
   app: path.resolve(__dirname, 'app'),
