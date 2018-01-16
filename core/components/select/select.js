@@ -173,5 +173,4 @@ class Select extends React.Component<PropsType, StateType> {
   }
 }
 
-/** @component */
 export default Select

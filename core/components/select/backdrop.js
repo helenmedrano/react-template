@@ -27,5 +27,4 @@ Backdrop.defaultProps = {
   active: false,
 }
 
-/** @ignore */
 export default Backdrop

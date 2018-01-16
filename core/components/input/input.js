@@ -39,5 +39,4 @@ Input.defaultProps = {
   inverted: false,
 }
 
-/** @component */
 export default Input

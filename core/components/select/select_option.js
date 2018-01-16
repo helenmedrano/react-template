@@ -23,5 +23,4 @@ const SelectOption = ({ onSelect, value, ...other }: PropsType) => (
   <StyledRootContainer onClick={() => onSelect(value)} {...other} />
 )
 
-/** @ignore */
 export default SelectOption

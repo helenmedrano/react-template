@@ -47,5 +47,4 @@ SelectOptionMenu.defaultProps = {
   className: '',
 }
 
-/** @ignore */
 export default SelectOptionMenu
