@@ -79,11 +79,16 @@ describe('Demo page', () => {
 
     deep
       .find('#authFormEmailInput')
+      .hostNodes()
       .simulate('change', { target: { name: 'email', value: mockUser.email } })
     deep
       .find('#authFormPasswordInput')
+      .hostNodes()
       .simulate('change', { target: { name: 'password', value: password } })
-    deep.find('#signInButton').simulate('click')
+    deep
+      .find('#signInButton')
+      .hostNodes()
+      .simulate('click')
 
     expect(mockSignInWithEmailAndPassword.mock.calls.length).toBe(1)
     expect(mockSignInWithEmailAndPassword.mock.calls[0][0]).toBe(mockUser.email)
@@ -96,12 +101,17 @@ describe('Demo page', () => {
 
     deep
       .find('#authFormEmailInput')
+      .hostNodes()
       .simulate('change', { target: { name: 'email', value: mockUser.email } })
     deep
       .find('#authFormPasswordInput')
+      .hostNodes()
       .simulate('change', { target: { name: 'password', value: password } })
 
-    deep.find('#signUpButton').simulate('click')
+    deep
+      .find('#signUpButton')
+      .hostNodes()
+      .simulate('click')
 
     expect(mockCreateUserWithEmailAndPassword.mock.calls.length).toBe(1)
     expect(mockCreateUserWithEmailAndPassword.mock.calls[0][0]).toBe(

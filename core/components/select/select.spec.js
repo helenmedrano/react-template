@@ -35,19 +35,30 @@ describe('Select', () => {
   it('Displays the placeholder when no value is selected', () => {
     const wrapper = getComponent()
 
-    expect(wrapper.find('.select').text()).toBe('placeholder')
+    expect(
+      wrapper
+        .find('.select')
+        .hostNodes()
+        .text()
+    ).toBe('placeholder')
   })
 
   it('Displays the appropriate option when one is selected', () => {
     const wrapper = getComponent({ value: 2 })
 
-    expect(wrapper.find('.select').text()).toBe(options[1].text)
+    expect(
+      wrapper
+        .find('.select')
+        .hostNodes()
+        .text()
+    ).toBe(options[1].text)
   })
 
   it('Calls onSelect when an option is clicked', () => {
     const wrapper = getComponent({ value: 2 })
     wrapper
       .find('.option')
+      .hostNodes()
       .first()
       .simulate('click', { target: { value: options[0].value } })
 
@@ -56,14 +67,20 @@ describe('Select', () => {
 
   it('Calls onFocus when select is focused', () => {
     const wrapper = getComponent({ value: 2 })
-    wrapper.find('.select').simulate('focus')
+    wrapper
+      .find('.select')
+      .hostNodes()
+      .simulate('focus')
 
     expect(mockOnFocus).toBeCalled()
   })
 
   it('Calls onBlur when select is blurred', () => {
     const wrapper = getComponent({ value: 2 })
-    wrapper.find('.select').simulate('blur')
+    wrapper
+      .find('.select')
+      .hostNodes()
+      .simulate('blur')
 
     expect(mockOnBlur).toBeCalled()
   })
