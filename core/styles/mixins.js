@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import * as R from 'ramda'
 
 const defaultTransitionOptions = {
   duration: '.2s',
@@ -17,10 +17,10 @@ const clearFix = () => `
 `
 
 const transitions = (properties, options = defaultTransitionOptions) => {
-  const attributes = _.chain(properties)
-    .map(x => `${x} ${options.duration} ${options.timingFunction}`)
-    .join(', ')
-    .value()
+  const attributes = R.join(
+    ', ',
+    R.map(x => `${x} ${options.duration} ${options.timingFunction}`)
+  )
 
   return `transition: ${attributes}`
 }

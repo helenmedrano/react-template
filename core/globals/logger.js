@@ -1,6 +1,5 @@
+import { identity } from 'ramda'
 import config from 'core/config'
-
-const identity = x => x
 
 /* eslint-disable no-console */
 let logger = {

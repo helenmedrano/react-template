@@ -1,8 +1,8 @@
 // @flow
+
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import _ from 'lodash'
 import * as R from 'ramda'
 import { actions } from 'todo/store/partitions'
 import Tabs from 'todo/components/tabs'
@@ -68,15 +68,15 @@ class TodoComponent extends Component<PropsType, StateType> {
         value: todo.todo,
       }
     }
+    const statusFilterFn = R.compose(
+      R.cond([
+        [R.equals('active'), () => R.propEq('completed', false)],
+        [R.equals('completed'), () => R.propEq('completed', true)],
+        [R.T, () => R.T],
+      ])
+    )(this.state.filter)
 
-    switch (this.state.filter) {
-      case 'completed':
-        return _.filter(todos, ['completed', true]).map(mapTodos)
-      case 'active':
-        return _.filter(todos, ['completed', false]).map(mapTodos)
-      default:
-        return _.map(todos, mapTodos)
-    }
+    return R.compose(R.map(mapTodos), R.filter(statusFilterFn))(todos)
   }
 
   setFilter = R.when(

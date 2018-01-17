@@ -1,5 +1,5 @@
 import { handleActions, createActions } from 'redux-actions'
-import { identity } from 'todo/utils'
+import { identity } from 'ramda'
 
 const defaultInitialState = {
   creatingTodo: false,

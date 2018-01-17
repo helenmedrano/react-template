@@ -2,7 +2,7 @@
 import * as React from 'react'
 import * as R from 'ramda'
 import styled from 'styled-components'
-import { startCase } from 'lodash'
+import startCase from 'lodash.startcase'
 import { truncate } from 'core/styles/mixins'
 import SelectOption from './select_option'
 import SelectOptionMenu from './select_option_menu'

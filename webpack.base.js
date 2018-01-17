@@ -2,7 +2,7 @@ const path = require('path')
 const dotenv = require('dotenv')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const _ = require('lodash')
+const R = require('ramda')
 
 dotenv.config()
 
@@ -25,20 +25,20 @@ const apps = {
   ),
 }
 
-const appEntries = _.mapValues(apps, value => [
-  'babel-polyfill',
-  path.join(value, './index.js'),
-])
+const appEntries = R.map(
+  value => ['babel-polyfill', path.join(value, './index.js')],
+  apps
+)
 
-const appHtmlEntries = _.map(
-  apps,
+const appHtmlEntries = R.mapObjIndexed(
   (value, key) =>
     new HtmlWebpackPlugin({
       inject: true,
       chunks: [key],
       filename: key === 'app' ? 'index.html' : path.join(key, 'index.html'),
       template: paths.htmlTemplate,
-    })
+    }),
+  apps
 )
 
 const env = {
@@ -56,7 +56,7 @@ const baseConfig = {
   resolve: {
     extensions: ['.js'],
     modules: ['node_modules'],
-    alias: _.merge(
+    alias: R.merge(
       {
         i18n: paths.i18n,
         logger: paths.logger,
