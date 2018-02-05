@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react'
-import styled from 'styled-components'
+import { css } from 'react-emotion'
 import {
   disabledColor,
   primaryTextColor,
@@ -23,53 +23,40 @@ type PropsType = {
   type?: 'button' | 'submit' | 'reset',
 }
 
-const getButtonStyles = ({ basic }) => {
-  const styles = {
-    border: `1px solid ${primaryTextColor}`,
-    padding: '0.5em 1em',
+const buttonStyle = {
+  color: primaryTextColor,
+  cursor: 'pointer',
+  '&:disabled': {
+    color: disabledColor,
+    borderColor: disabledColor,
     background: white,
-  }
-
-  if (basic) {
-    styles.border = 'none'
-    styles.padding = '0'
-    styles.background = 'rgba(0, 0, 0, 0)'
-  }
-
-  return `
-    border: ${styles.border};
-    padding: ${styles.padding};
-    background: ${styles.background};
-  `
+    cursor: 'unset',
+    textDecoration: 'none',
+  },
 }
 
-const getHoverStyles = ({ basic }) => {
-  if (basic) {
-    return ''
-  }
-
-  return `
-    &:hover {
-      color: ${white};
-      background: ${primaryColor}
-    }
-  `
+const basicButtonStyle = {
+  border: 'none',
+  padding: 0,
+  background: 'rgba(0, 0, 0, 0)',
 }
 
-const StyledButton = styled.button`
-  ${props => getButtonStyles(props)} color: ${primaryTextColor};
-  cursor: pointer;
+const fancyButtonStyle = {
+  border: `1px solid ${primaryTextColor}`,
+  padding: '0.5em 1em',
+  background: white,
+  '&:hover:not([disabled])': {
+    color: white,
+    background: primaryColor,
+  },
+}
 
-  ${props => getHoverStyles(props)} &:disabled {
-    color: ${disabledColor};
-    border-color: ${disabledColor};
-    background: ${white};
-    cursor: unset;
-    text-decoration: none;
-  }
-`
+const buttonClass = basic =>
+  css([buttonStyle, basic ? basicButtonStyle : fancyButtonStyle])
 
-const Button = (props: PropsType) => <StyledButton {...props} />
+const Button = ({ basic, ...rest }: PropsType) => (
+  <button className={buttonClass(basic)} {...rest} />
+)
 
 Button.defaultProps = {
   basic: false,
