@@ -1,5 +1,11 @@
 {
-  "private": true,
+  "name": "react-launchpad",
+  "license": "MIT",
+  "description": "React starter template with common components and services to help with rapid app development",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Originate/react-template"
+  },
   "scripts": {
     "dev": "webpack-dev-server --hot --config ./webpack.dev.js",
     "build": "NODE_ENV=production webpack --progress --config ./webpack.prod.js",
